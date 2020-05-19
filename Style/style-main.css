@@ -1,15 +1,16 @@
-.my-title{
-    background-color: blueviolet;
-    height:20%;
-}
-.naslov1{
-    width:50%;
-    background-color:red;
-    
-}
 .footer{
-background: cyan;
+    background: cyan;
+    height:50%;
 }
 .nesto{
     background: darkolivegreen;
+    
+
+}
+.my_nav{
+    background-color:darkorange;
+}
+body{
+    background-color:lightcoral;
+    font-family: 'Roboto', sans-serif;
 }
