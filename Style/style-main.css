@@ -1,16 +1,15 @@
 .footer{
-    background: cyan;
-    height:50%;
+    height:10%;
 }
 .nesto{
-    background: darkolivegreen;
+    border-right-style: ridge;
     
-
 }
-.my_nav{
-    background-color:darkorange;
+.nesto_nama{
+    font-size:20px;
 }
 body{
-    background-color:lightcoral;
+    background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
     font-family: 'Roboto', sans-serif;
 }

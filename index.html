@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="Style/style-main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -16,23 +17,39 @@
       
       <div class="w-100 p-3 text-center" id="navigacija">
         <!--Napravi banner s logom i user id-em-->
-      <div class="display-3">NASLOV</div>
+      <div class="display-3 p-5 mb-5">IME STRANICE OKO KOJEG SE JOS NISMO DOGOVRILI</div>
 
       </div> 
 
-  <!--napravi glavni dio-->
+  <!--napravi login form-->
     <div class="container-fluid">
-        <div class="row text-center my-title">
-            <div class="h-50 p-3 col-sm-12 nesto">Navigacija</div>
-            <div class="question"></div>
+      <!--sluzi za pomaknuti login form i nesto o nama par piksela dolje-->
+      <div class="row-fluid">
+        <div class="col-sm-12 p-5"></div>
+      </div>
+        <div class="row text-center justify-content-around">
+            <div class="col-sm-4 pt-5 nesto text-right">
+              <form name="login_form" method="post" action="landing_page.php">
+              <label for="username"><b>Korisnicko ime:</b></label>
+              <input type="text" name="username" id="username" class="col-sm-4 mb-3">
+              <br>
+              <label for="password"><b>Password:</b></label>
+              <input type="password" name="password" id="password" class="col-sm-4 mt-3">
+              <br>
+              <input type="submit" value="Login">
+              </form>
+            </div>
+            <div class="col-sm-4 m-2 p-5 nesto_nama">
+              Looking for a place to stay on your next vacation?
+              <br>
+              We are here to help with that, simply login and start searching, it is really easy!
+
+            </div>
+            
             
         </div>
-        <div class="row justify-content-around">
-            <div class="col-sm-8 p-3 text-center my_nav">navigacija</div>
-            
-        </div>
-        <div class="row">
-            <div class="col-sm-12 p-3 text-center footer">footer</div>
+        <div class="row-fluid">
+            <div class="col-sm-12 mt-5 text-center fixed-bottom footer">Courtesy of TIN_MAR&co &copy</div>
 
         </div>
     </div>
