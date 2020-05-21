@@ -1,0 +1,28 @@
+
+.nesto{
+    border-style: ridge;
+}
+
+.user_info{
+    background-color:#e3d1d1;
+    box-shadow:-5px 5px 10px gray;
+}
+.reservations_p{
+    background-color: #e3d1d1;
+    box-shadow:5px 5px 10px gray;
+}
+.settings{
+    background-color: #e3d1d1;
+    box-shadow:5px 5px 10px gray;
+}
+body{
+    background-color: #d1b6b6;
+    font-family: 'Roboto', sans-serif;
+}
+.footer{
+    height:10%; 
+    position:fixed;
+    bottom:0;
+    left:0;
+}
+
