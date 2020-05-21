@@ -24,31 +24,56 @@
   <!--napravi login form-->
     <div class="container-fluid">
       <!--sluzi za pomaknuti login form i nesto o nama par piksela dolje-->
-      <div class="row-fluid">
+      <div class="row">
         <div class="col-sm-12 p-5"></div>
       </div>
-        <div class="row text-center justify-content-around">
-            <div class="col-sm-4 pt-5 nesto text-right">
-              <form name="login_form" method="post" action="landing_page.php">
-              <label for="username"><b>Username:</b></label>
-              <input type="text" name="username" id="username" class="col-sm-4 mb-3">
+        <div class="row text-center justify-content-around ">
+            <div class="col-sm-4  text-center ">
+              <a class="btn btn-primary m-3" data-toggle="collapse" href="#collapseLogin" role="button" aria-expanded="false" aria-controls="collapseLogi">
+                LogIn
+              </a>
+              <div class="collapse" id="collapseLogin">
+                <div class="card card-body" style="background:none">
+                  <form name="login_form" method="post" action="landing_page.php">
+                    <label for="username"><b>Username:</b></label>
+                    <input type="text" name="username" id="username" class="col-sm-4 mb-3">
+                    <br>
+                    <label for="password"><b>Password:</b></label>
+                    <input type="password" name="password" id="password" class="col-sm-4 mt-3">
+                    <br>
+                    <input type="submit" value="Login" class="mt-2 btn btn-dark">
+                    <br><br>
+                    </form>
+                </div>
+              </div>
               <br>
-              <label for="password"><b>Password:</b></label>
-              <input type="password" name="password" id="password" class="col-sm-4 mt-3">
-              <br>
-              <input type="submit" value="Login" class=" mt-2 btn btn-dark">
-              <br><br>
-              <input type="submit" value="Login">
-              </form>
+              <a class="btn btn-primary m-3 " data-toggle="collapse" href="#collapseSignup" role="button" aria-expanded="false" aria-controls="collapseSignup">
+                Sign Up
+              </a>
+              <div class="collapse" id="collapseSignup">
+                <div class="card card-body" style="background:none">
+                  <form name="signup_form" method="post" action="signup.php">
+                   
+                   First name:<br>
+                   Last name:<br>
+                   Date of birth:<br>
+                   E-Mail:<br>
+                   Username:<br>
+                   Password:<br>
+                   Phone:<br>
+                   User image(optional):<br>
+
+                    <input type="submit" value="Sign Up" class="mt-2 btn btn-info">
+                    <br><br>
+                    </form>
+                </div>
+              </div>
             </div>
             <div class="col-sm-4 m-2 p-5 nesto_nama">
               Looking for a place to stay on your next vacation?
               <br>
               We are here to help with that, simply login and start searching, it is really easy!
-
             </div>
-            
-            
         </div>
         <div class="row-fluid">
             <div class="col-sm-12 mt-5 text-center fixed-bottom footer">Courtesy of TIN_MAR&co &copy</div>
