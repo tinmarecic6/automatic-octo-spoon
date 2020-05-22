@@ -41,7 +41,7 @@
      <div class="row justify-content-md-center">
        <div class="col col-md-2 text-center user_info ">
         <!--if pic property of user table is empty show stock image-->
-          <img src="media/profil.png" alt="profile_pic" width="50%"><br> 
+          <img src="media/profil.png" alt="profile_pic" width="50%" class="mt-2 rounded-circle border border-dark"><br> 
           <div class="text-left">
             User info<br>
             <hr>
