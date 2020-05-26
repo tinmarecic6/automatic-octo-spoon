@@ -79,7 +79,7 @@
           echo '<div class="col col-sm-3 m-2">
               <div class="card" >
                   <div class="card-body">
-                    <h5 class="card-title">Odmor broj '.($i+1).'</h5>
+                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Odmor broj '.($i+1).'</h5>
                     <h6 class="card-subtitle  text-muted">Card subtitle</h6>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
                     <a href="#" class="card-link">Card link</a>
@@ -88,6 +88,7 @@
                 </div>
               </div><!--column-->';}
           ?>
+          
             </div>
           </div>
          </div>
