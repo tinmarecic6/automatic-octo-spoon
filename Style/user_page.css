@@ -21,8 +21,40 @@ body{
 }
 .footer{
     height:10%; 
-    position:fixed;
     bottom:0;
     left:0;
 }
 
+.navigacija
+{
+    height: 1%;
+    position: sticky;
+    top: 0;
+    padding-bottom: 1%;
+}
+
+.navigacija a
+{
+    text-decoration: none;
+}
+
+.navigacija a:link
+{
+    color:black;
+}
+
+.navigacija a:visited
+{
+    color:black;
+}
+
+.navigacija a:hover
+{
+    color:white;
+}
+
+.navigacija a:active
+{
+    color:white;
+    font-weight: bolder;
+}
