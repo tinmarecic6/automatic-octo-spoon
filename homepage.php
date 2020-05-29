@@ -20,7 +20,9 @@
          Logo i ime stranice
         </div>
        <div class="col-md-auto col-lg-5 ">
-         
+         <?php 
+         session_start();
+         ?>
         </div>
        <div class="col col-lg-2 p-4 text-center banner ">
        <div class="dropdown">
@@ -31,7 +33,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Settings</a>
             <a class="dropdown-item" href="#">Info</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
             

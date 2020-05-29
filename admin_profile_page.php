@@ -13,6 +13,18 @@
     <title>Admin page</title>
   </head>
   <body>
+    <!--user type test-->
+    <?php 
+    session_start();
+    if(isset($_SESSION['Type_ID']) && $_SESSION['Type_ID']==1 ){
+      #Do nothing, display admin page
+    }
+    else {
+      #user is not admin, return to homepage
+      header("Location: homepage.php");
+    }
+    
+    ?>
     <!--Banner-->
    <div class="container-fluid">
      <div class="row justify-content-md-center">
@@ -31,7 +43,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Settings</a>
             <a class="dropdown-item" href="#">Info</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
             
