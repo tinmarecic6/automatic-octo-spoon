@@ -1,0 +1,30 @@
+<?php
+require_once('scripts/db.php');
+$conn = db();
+$username = $_POST['username'];
+$pass = $_POST['pass'];
+$sql_user = 'SELECT * from user where Username="'.$username.'" and Password="'.$pass.'";';
+$result = $conn->query($sql_user);
+session_start();
+$_SESSION['error_mess'] = '<div class="alert alert-danger alert-dismissable fade show" role="alert">
+    Krivi Username ili password
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button></div>';
+if($result && $result->num_rows==1){
+    $row = $result->fetch_assoc();
+    $_SESSION['username']=$username;
+    $_SESSION['typeID']=$row['Type_ID'];
+    switch($_SESSION['typeID']){
+        case 1: header("Location: admin_profile_page.php");break;
+        case 2: header("Location: homepage.php");break;
+        case 3: header("Location: user_profile_page.php");break;
+        default : header("Location: homepage.php");break;
+    }
+}
+else{
+    header("Location: index.php");
+   
+}
+
+?>
