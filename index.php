@@ -4,23 +4,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="Style/style-main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title>Cro Book</title>
   </head>
   <body>
-    
-      
       <div class="w-100 p-3 text-center" id="navigacija">
         <!--Napravi banner s logom i user id-em-->
       <div class="display-3 p-5 mb-5">IME STRANICE OKO KOJEG SE JOS NISMO DOGOVRILI</div>
-
       </div> 
-
   <!--napravi login form-->
     <div class="container-fluid">
       <!--sluzi za pomaknuti login form i nesto o nama par piksela dolje-->
@@ -43,7 +37,6 @@
                       </div>
                       <div class="form-row mt-2 mb-2 justify-content-around">
                         <input type="submit" value="Login" class="mt-2 btn btn-dark">
-                        
                       </div>
                     </form>
                 </div>
@@ -54,7 +47,6 @@
                             echo $_SESSION['error_mess'];
                             unset($_SESSION['error_mess']);
                           }
-                          
                         ?>
               <br>
               <a class="btn btn-primary m-3 " data-toggle="collapse" href="#collapseSignup" role="button" aria-expanded="false" aria-controls="collapseSignup">
@@ -62,34 +54,32 @@
               </a>
               <div class="collapse" id="collapseSignup">
                 <div class="card card-body" style="background:none">
-                  <form name="signup_form" method="post" action="login_script.php">
+                  <form name="signup_form" method="post" action="signup_script.php" enctype="multipart/form-data">
                    <div class="form-row justify-content-around">
                    <!-- First name: -->
-                   <input type="text" class="col col-sm-5 form-control" id="fname" placeholder="First name" required>
+                   <input type="text" class="col col-sm-5 form-control" name="fname" id="fname" placeholder="First name" required>
                    <!-- Last name: -->
-                   <input type="text" class="col col-sm-5 form-control" id="lname" placeholder="Last name" required>
+                   <input type="text" class="col col-sm-5 form-control" name="lname" id="lname" placeholder="Last name" required>
                   </div>
                   <div class="form-row mt-3 justify-content-around">
                         <!-- username -->
-                        <input type="text" class="col col-sm-5 form-control" id="username" placeholder="Username" required>
+                        <input type="text" class="col col-sm-5 form-control" name="username_signup" id="username" placeholder="Username" required>
                         <!-- password -->
-                        <input type="password" class="col col-sm-5 form-control" id="password" placeholder="Password" required>
+                        <input type="password" class="col col-sm-5 form-control" name="password_signup" id="password" placeholder="Password" required>
                    </div>
                    <!-- Date of birth:<br> -->
                    <div class="form-row mt-3 justify-content-around">
                       <!-- email -->
-                      <input type="email" class="col col-sm-5 form-control" id="email" placeholder="Email" required>
+                      <input type="email" class="col col-sm-5 form-control" name="email" id="email" placeholder="Email" required>
                       <!-- phone -->
-                      <input type="text" class="col col-sm-5 form-control" id="phone" placeholder="Phone number">
+                      <input type="date" class="col col-sm-5 form-control" name="dob" id="dob" placeholder="Your birthday date">
                    </div>
                    <div class="form-row mt-3 justify-content-around">
                       <div class="col col-sm-7">
-                        <input type="file" class="form-control-file" id="profile_pic"> 
+                        <input type="file" class="form-control-file" name="profile_pic" id="profile_pic"> 
                         <label for="profile_pic">Upload your profile picture here.</label>
                       </div>
-
                    </div>
-
                     <input type="submit" value="Sign Up" class="mt-2 btn btn-info">
                     <br><br>
                     </form>
@@ -104,11 +94,8 @@
         </div>
         <div class="row-fluid">
             <div class="col-sm-12 mt-5 text-center fixed-bottom footer">Courtesy of TIN_MAR&co &copy</div>
-
         </div>
     </div>
-    <!--Prebac footer u zasebni container-->
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
