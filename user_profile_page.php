@@ -56,23 +56,38 @@
      <div class="row justify-content-md-center">
       <div class="col col-md-10 ">
             <?php
-            if(isset($_POST['fname'])){
-              $sql_update_profile_pic = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
+            if(isset($_POST['fname']) && $_POST['fname']!==''){
+              $sql_update_fname = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_fname);
+              unset($_POST);
+              echo 'mjenjam ime';
+              
             } 
-            if(isset($_POST['lname'])){
-              $sql_update_profile_pic = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
+            if(isset($_POST['lname']) && $_POST['lname']!==''){
+              $sql_update_lname = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_lname);
+              unset($_POST);
+              echo 'mjenjam prezime';
             }
             
-            if(isset($_POST['dob'])){
-              $sql_update_profile_pic = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
+            if(isset($_POST['dob']) && $_POST['dob']!==''){
+              $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_dob);
+              unset($_POST);
+              echo 'mjenjam dob';
             }
-            
-            if(isset($_POST['profile_pic']) && isset($_FILES['profile_pic'])){
+            #fix duplicate pic creation and remove post after upload
+            if(isset($_FILES['profile_pic']['tmp_name'])){
               $target_dir = "media/pictures/";
-              $target_file = $target_dir . rand() . basename($_FILES['profile_pic']['name']);
-              $sql_update_profile_pic = 'UPDATE user set User_image = "'.$_POST['profile_pic'].'"';
+              $ext = pathinfo($_FILES['profile_pic']['name']);
+              $target_file = $target_dir . rand() .'.'.$ext['extension'];
+              $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$_SESSION['User_ID'].';';
               if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)) {
-                echo "The file ". basename( $_FILES["profile_pic"]["name"]). " has been uploaded.";
+                $conn->query($sql_update_profile_pic);
+                echo 'mjenjam sliku';
+                unset($_FILES);
+
+
               } 
               else {
                 echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
@@ -81,9 +96,9 @@
                 <span aria-hidden="true">&times;</span>
                 </button></div>';
               }
+              
             }
-            
-            
+            var_dump($_FILES);
             ?>
       </div>
      </div>
@@ -126,15 +141,15 @@
                       </button>
                     </div>
                     <div class="modal-body text-center">
-                    <form name="edit_info" method="POST" acton="?user=<?php echo $_SESSION['User_ID']; ?>">
-                    First name: <input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"><br>
-                    Last name:  <input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"><br>
-                    Date of birth: <input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>" required><br>
-                    Upload or change your profile picture: <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <input type="submit"  class="btn btn-primary text-light" value="Save changes">
+                      <form enctype="multipart/form-data" name="edit_info" method="POST"  acton="?user=<?php echo $_SESSION['User_ID']; ?>">
+                        First name: <input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"><br>
+                        Last name:  <input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"><br>
+                        Date of birth: <input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>
+                        Upload or change your profile picture: <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
+                        </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit"  class="btn btn-primary text-light" value="Save changes">
                       </form>
                     </div>
                   </div>
@@ -150,7 +165,7 @@
           <div class="container-fluid">
             <div class="row justify-content-center mt-5">
           <?php
-          $sql_vacay = 'SELECT * FROM reservation where User_ID = '.$_SESSION['User_ID'].'';
+          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].';';
           $result_vacay = $conn->query($sql_vacay);
           if($result_vacay->num_rows>0){
             foreach ($result_vacay as $rv){
@@ -158,8 +173,9 @@
               <div class="card" >
                   <div class="card-body">
                     <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
-                    <h6 class="card-subtitle  text-muted">From: '.$rv['Date_from'].' To: '.$rv['Date_to'].'</h6>
-                    <p class="card-text">You went on a trip on the date of : {start date} until {end date} in the location of {location info}</p>
+                    <h6 class="card-subtitle  text-muted">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
+                    <hr>
+                    <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
                     <a href="#" class="card-link">View info</a>
                     <a href="#" class="card-link">Delete</a>
                   </div>
