@@ -15,13 +15,16 @@
   <body>
     <!--user type test-->
     <?php 
+    require_once('scripts/db.php');
+    $conn = db();
     session_start();
-    if(isset($_SESSION['Type_ID']) && $_SESSION['Type_ID']==1 ){
+    if($_SESSION['Type_ID']=='1' ){
       #Do nothing, display admin page
     }
     else {
       #user is not admin, return to homepage
       header("Location: homepage.php");
+      
     }
     
     ?>
@@ -37,10 +40,19 @@
        <div class="col col-lg-2 p-4 text-center banner ">
        <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Korisnicko ime
             <img src="media/person-fill.svg" alt="userpic" height="30" title="userpic">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <h6 class="dropdown-header text-center">
+          <?php 
+          $sql_user = 'Select * from `user` where `User_ID` = "'.$_SESSION['User_ID'].'"; ';
+          $result = $conn->query($sql_user);
+          if($result && $result->num_rows==1){
+            $row = $result->fetch_assoc();
+            echo $row['Username'].'--Admin';
+          }
+          ?>
+          </h6>
             <a class="dropdown-item" href="#">Settings</a>
             <a class="dropdown-item" href="#">Info</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
@@ -57,63 +69,89 @@
           <!--reservation info goes here-->
           <div class="text-left">
           <div class="container-fluid">
-            <div class="row justify-content-center mt-5">
+            <div class="row justify-content-left mt-5">
           <?php
-          /*if no pic in table show stock image.svg
-          if($r['Picture_ID']){
-            echo '<div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="'$r[Picture_ID]'" alt="Location image">
-                  <div class="card-body">
-                    <h5 class="card-title">'$r[State]'.,.'$r['City']</h5>
-                    <p class="card-text">info o putovanju</p>
-                    <a href="#" class="btn btn-primary">Details</a>
-                  </div>
-                </div>'
-          }
+          $sql_all_user = 'SELECT * from user';
+          $result_all_user = $conn->query($sql_all_user);
           
-          
-          
-          *//*modify once db is running*/ 
+
           echo
-          '<div class="col col-sm-4">
-            <table border="1">';
-              for($i = 0;$i<15;$i++)
-              {
-                echo
-                '<tr>
-                  <td>'.$i.'</td>
-                </tr>';
-              };
+          '<div class="col col-sm-12">
+            <table class="table table-hover table-dark">';
+            echo '<thead><tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Profile picture</th>
+            <th>Type ID</th>
+            <th>DOB</th>
+            <th>Password</th>
+            <th>Edit</th>
+            <th>Delete</th></tr></thead>';
+              foreach($result_all_user as $user){
+                echo '<tr>';
+                foreach($user as $col){
+                  echo '<td>'.$col.'</td>';
+                }
+                echo '</tr>';
+              }
           echo
             '</table>
-          </div>';
+            <hr>
+          </div>
+          ';
 
-
+          $sql_all_location = 'SELECT * from location';
+          $result_all_location = $conn->query($sql_all_location);
           echo
-          '<div class="col col-sm-4">
-            <table border="1">';
-              for($i = 0;$i<15;$i++)
-              {
-                echo
-                '<tr>
-                  <td>'.$i.'</td>
-                </tr>';
-              };
-          echo
-            '</table>
-          </div>';
+          '<div class="col col-sm-12">
+          <table class="table table-hover table-dark">';
+          echo '<thead><tr>
+          <th>Location ID</th>
+          <th>Street address</th>
+          <th>Street nombre</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip code</th>
+          <th>Edit</th>
+          <th>Delete</th></tr></thead>';
+            foreach($result_all_location as $location){
+              echo '<tr>';
+              foreach($location as $loc){
+                echo '<td>'.$loc.'</td>';
+                
+              }
+              var_dump($location);
+              echo '<td><a href="admin_edit.php?locid='.$location['Location_ID'].'">Edit</a></td>';
+              echo '<td>Delete</td>';
+              echo '</tr>';
+            }
+        echo
+          '</table>
+          <hr>
+        </div>';
 
-
+        $sql_all_obj = 'SELECT * from object';
+        $result_all_obj = $conn->query($sql_all_obj);
           echo
-          '<div class="col col-sm-4">
-            <table border="1">';
-              for($i = 0;$i<15;$i++)
-              {
-                echo
-                '<tr>
-                  <td>'.$i.'</td>
-                </tr>';
-              };
+          '<div class="col col-sm-12">
+            <table class="table table-hover table-dark">';
+            echo '<thead><tr>
+            <th>Object ID</th>
+            <th>Object name</th>
+            <th>Price</th>
+            <th>Location ID</th>
+            <th>User ID</th>
+            <th>Edit</th>
+            <th>Delete</th></tr></thead>';
+              foreach($result_all_obj as $obj){
+                echo '<tr>';
+                foreach($obj as $obj){
+                  echo '<td>'.$obj.'</td>';
+                }
+                echo '</tr>';
+              }
           echo
             '</table>
           </div>';
