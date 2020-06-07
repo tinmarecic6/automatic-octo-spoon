@@ -22,17 +22,27 @@
        <div class="col-md-auto col-lg-5 ">
          <?php 
          session_start();
+         require_once('scripts/db.php');
+         $conn = db();
          ?>
         </div>
        <div class="col col-lg-2 p-4 text-center banner ">
        <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Korisnicko ime
             <img src="media/person-fill.svg" alt="userpic" height="30" title="userpic">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Info</a>
+          <h6 class="dropdown-header text-center">
+          <?php 
+          $sql_user = 'Select * from `user` where `User_ID` = "'.$_SESSION['User_ID'].'"; ';
+          $result = $conn->query($sql_user);
+          if($result && $result->num_rows==1){
+            $row = $result->fetch_assoc();
+            echo $row['Username'];
+          }
+          ?>
+          </h6>
+            <a class="dropdown-item" href="homepage.php">Homepage</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
@@ -55,21 +65,7 @@
           <div class="container-fluid">
             <div class="row justify-content-center mt-5">
           <?php
-          /*if no pic in table show stock image.svg
-          if($r['Picture_ID']){
-            echo '<div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="'$r[Picture_ID]'" alt="Location image">
-                  <div class="card-body">
-                    <h5 class="card-title">'$r[State]'.,.'$r['City']</h5>
-                    <p class="card-text">info o putovanju</p>
-                    <a href="#" class="btn btn-primary">Details</a>
-                  </div>
-                </div>'
-          }
-          
-          
-          
-          *//*modify once db is running*/ 
+
           for($i = 0;$i<15;$i++){
           echo '<div class="col col-sm-12 m-2">
               <div class="card" >
