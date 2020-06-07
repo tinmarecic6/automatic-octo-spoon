@@ -32,7 +32,7 @@ $signup_sql = 'INSERT INTO user
                 (User_ID, Username, First_name, Last_name, User_image, Type_ID, Date_of_birth, Password) 
                 VALUES (null,"'.$username_signup.'","'.$firstName.'","'.$lastName.'","'.basename($target_file).'",'.$typeID.',"'.$dob.'","'.$password_signup.'");';
 $_SESSION['username'] = $username_signup;
-$_SESSION['typeID'] = $typeID;
+$_SESSION['Type_ID'] = $typeID;
 
 
 

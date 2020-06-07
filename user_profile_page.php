@@ -24,7 +24,7 @@
          require_once('scripts/db.php');
          $conn = db();
          session_start();
-         if(!isset($_SESSION['User_ID'])){
+         if(!isset($_SESSION['User_ID']) || $_SESSION['Type_ID']!=3){
           header("Location: index.php");
          }
          $sql_user = 'SELECT * FROM user where User_ID = "'.$_SESSION['User_ID'].'";';
@@ -41,12 +41,10 @@
           <?php 
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'];
-          }
+            echo $row['Username'];}
           ?>
           </h6>
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Info</a>
+            <a class="dropdown-item" href="homepage.php">Homepage</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>  
@@ -98,7 +96,6 @@
               }
               
             }
-            var_dump($_FILES);
             ?>
       </div>
      </div>
@@ -155,6 +152,10 @@
                   </div>
                 </div>
                 
+              </div>
+              <hr>
+              <div class="row m-4 justify-content-md-center">
+              <a class="btn btn-secondary text-light" href="become_host.php" >Become a host</a>
               </div>
           </div>
         </div>
