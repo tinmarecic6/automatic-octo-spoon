@@ -67,17 +67,35 @@
           <?php
 
           for($i = 0;$i<15;$i++){
-          echo '<div class="col col-sm-12 m-2">
-              <div class="card" >
-                  <div class="card-body">
-                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Odmor broj '.($i+1).'</h5>
-                    <h6 class="card-subtitle  text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+            echo'
+                <div class="col col-sm-12 m-3">
+                  <div class="card kartice">
+                    <div class="card-body">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-2">
+                            <img src="media/sg.jpeg" alt="slika" width="100%"></img>
+                          </div>
+                          <div class="col-7">
+                            <div class="row">
+                              Host: Pero Perić
+                            </div>
+                            <br>
+                            <div class="row">
+                              Description:<br>
+                              Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
+                            </div>
+                          </div>
+                          <div class="col text-right">
+                            Price for one night: <br>
+                            1.000,00 HRK
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div><!--column-->';}
+              </div>
+              ';}
           ?>
           
             </div>

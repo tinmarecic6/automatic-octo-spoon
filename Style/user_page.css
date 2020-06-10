@@ -4,20 +4,27 @@
 }
 
 .user_info{
-    background-color:#e3d1d1;
-    box-shadow:-5px 5px 10px gray;
+    background-color: rgba(52,58,64,1);
+    /*box-shadow:-5px 5px 10px gray;*/
 }
 .reservations_p{
-    background-color: #e3d1d1;
+    background-color:  rgba(52,58,64,1);
     box-shadow:5px 5px 10px gray;
 }
 .settings{
-    background-color: #e3d1d1;
+    background-color: rgba(52,58,64,1);
     box-shadow:5px 5px 10px gray;
 }
+
+.kartice{
+    background-color: #505458;
+}
+
 body{
-    background-color: #d1b6b6;
+    background: rgb(52,58,64);
+    background: radial-gradient(circle, rgba(52,58,64,1) 0%, rgba(28,30,32,1) 100%);
     font-family: 'Roboto', sans-serif;
+    color: white;
 }
 .footer{
     height:10%; 
@@ -40,21 +47,21 @@ body{
 
 .navigacija a:link
 {
-    color:black;
+    color:white;
 }
 
 .navigacija a:visited
 {
-    color:black;
+    color:white;
 }
 
 .navigacija a:hover
 {
-    color:white;
+    color:black;
 }
 
 .navigacija a:active
 {
-    color:white;
+    color:black;
     font-weight: bolder;
 }

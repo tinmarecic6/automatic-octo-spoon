@@ -53,8 +53,6 @@
           }
           ?>
           </h6>
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Info</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
@@ -102,37 +100,7 @@
           </div>
           ';
 
-          $sql_all_location = 'SELECT * from location';
-          $result_all_location = $conn->query($sql_all_location);
-          echo
-          '<div class="col col-sm-12">
-          <table class="table table-hover table-dark">';
-          echo '<thead><tr>
-          <th>Location ID</th>
-          <th>Street address</th>
-          <th>Street nombre</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Zip code</th>
-          <th>Edit</th>
-          <th>Delete</th></tr></thead>';
-            foreach($result_all_location as $location){
-              echo '<tr>';
-              foreach($location as $loc){
-                echo '<td>'.$loc.'</td>';
-                
-              }
-              var_dump($location);
-              echo '<td><a href="admin_edit.php?locid='.$location['Location_ID'].'">Edit</a></td>';
-              echo '<td>Delete</td>';
-              echo '</tr>';
-            }
-        echo
-          '</table>
-          <hr>
-        </div>';
-
-        $sql_all_obj = 'SELECT * from object';
+          $sql_all_obj = 'SELECT * from object';
         $result_all_obj = $conn->query($sql_all_obj);
           echo
           '<div class="col col-sm-12">
@@ -154,7 +122,38 @@
               }
           echo
             '</table>
+            <hr>
           </div>';
+
+          $sql_all_reservation = 'SELECT * from reservation';
+          $result_all_reservation = $conn->query($sql_all_reservation);
+          echo
+          '<div class="col col-sm-12">
+          <table class="table table-hover table-dark">';
+          echo '<thead><tr>
+          <th>Reservation ID</th>
+          <th>Date from</th>
+          <th>Date to</th>
+          <th>Status</th>
+          <th>Confirmed</th>
+          <th>Object ID</th>
+          <th>User ID</th>
+          <th>Edit</th>
+          <th>Delete</th></tr></thead>';
+            foreach($result_all_reservation as $reservation){
+              echo '<tr>';
+              foreach($reservation as $res){
+                echo '<td>'.$res.'</td>';
+                
+              }
+              var_dump($reservation);
+              echo '<td><a href="admin_edit.php?resid='.$reservation['Reservation_ID'].'">Edit</a></td>';
+              echo '<td>Delete</td>';
+              echo '</tr>';
+            }
+        echo
+          '</table>
+        </div>';
           ?>
           
             </div>
