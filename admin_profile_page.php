@@ -92,6 +92,9 @@
                 foreach($user as $col){
                   echo '<td>'.$col.'</td>';
                 }
+                //var_dump($user);
+                echo '<td><a href="admin_edit.php?userid='.$user['User_ID'].'">Edit</a></td>';
+                echo '<td>Delete</td>';
                 echo '</tr>';
               }
           echo
@@ -117,6 +120,8 @@
                 echo '<tr>';
                 foreach($obj as $obj){
                   echo '<td>'.$obj.'</td>';
+                  echo '<td><a href="admin_edit.php?userid='.$obj['Object_ID'].'">Edit</a></td>';
+                  echo '<td><a href="admin_edit.php?userid='.$user['User_ID'].'">Edit</a></td>';
                 }
                 echo '</tr>';
               }

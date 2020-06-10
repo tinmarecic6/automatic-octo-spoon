@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="Style/user_page.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <title>User page</title>
+    <title>Host page</title>
   </head>
   <body>
     <!--Banner-->
@@ -24,7 +24,7 @@
          require_once('scripts/db.php');
          $conn = db();
          session_start();
-         if(!isset($_SESSION['User_ID']) || $_SESSION['Type_ID']!=3){
+         if(!isset($_SESSION['User_ID']) || $_SESSION['Type_ID']!=2){
           header("Location: index.php");
          }
          $sql_user = 'SELECT * FROM user where User_ID = "'.$_SESSION['User_ID'].'";';
@@ -45,6 +45,7 @@
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
+            <a class="dropdown-item" href="newobject.php">New object</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>  
