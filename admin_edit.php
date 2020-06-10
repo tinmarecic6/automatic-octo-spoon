@@ -125,8 +125,8 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
 
 <!--User info edit-->
     <?php if(isset($_GET['userid'])): ?>
-         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid="<?php echo $userid;?>">
-                <h3>Change user info:</h3><br>
+         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid='.$userid.'">
+                <h3 mb-4>Change user info:</h3>
                 <div class="row">
                     <div class="col form-group">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
@@ -140,11 +140,11 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                 </div>
                 <div class="row">
                     <div class="col form-group">
-                        <label class="col" for="password">Password:</label>
+                        <label for="password">Password:</label>
                         <input type="text" class="form-control" id="password" name="password">
                     </div>
                     <div class="col">
-                            <label class="col" for="typeid">Type ID:</label>
+                            <label for="typeid">Type ID:</label>
                             <select class="col form-control" id="typeid" name="typeid" placeholder="Type ID">';
                             </select>
                     </div>
@@ -155,11 +155,11 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <input type="file" class="form-control-file" id="userimage">
                     </div>
                     <div class="col">
-                        <div class="row form-group">              
-                                <label class="col" for="dob">Date of birth:</label>
-                                </div>
-                                <input type="date" class="col form-control mr-3" name="dob" id="dob">
-                                </div>
+                        <div class="form-group">              
+                            <label for="dob">Date of birth:</label>
+                        </div>
+                            <input type="date" class="col form-control" name="dob" id="dob">
+                        </div>
                             </div>
                         </div>
                     </div>
@@ -169,8 +169,8 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
         <?php endif;?>
 <!--Object info edit-->
         <?php if(isset($_GET['objid'])): ?>
-            <form class="container" name="editobj" method="post" action="?objid='.$objid.'">
-                Change object info:<br><br>
+            <form class="container mt-5 pt-4" name="editobj" method="post" action="?objid='.$objid.'">
+                <h3 class="mb-4">Change object info:</h3>
                 <div class="row">
                     <div class="col form-group">
                         <input type="text" class="form-control" id="objectname" placeholder="Object name">
@@ -179,33 +179,36 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <input type="number" class="form-control" id="price" placeholder="Price">
                     </div>
                 </div>
-                <input type="submit" class="btn btn-secondary text-light" valeu="Update">
+                <input type="submit" class="btn btn-secondary text-light" value="Update">
             </form>
         <?php endif;?>
 <!--Reservation info edit-->
         <?php if(isset($_GET['resid'])): ?>                               
-            <form class="container" name="editres" method="post" action="?resid='.$resid.'">
-                Change reservation info:<br><br>
-                <div class="form-group">
-                <label for="datefrom">Date from:</label>
-                    <input type="date" class="form-control" id="datefrom">
-                </div>
-                <div class="form-group">
-                <label for="dateto">Date to:</label>
-                    <input type="text" class="form-control" id="dateto">
+            <form class="container mt-5 pt-4" name="editres" method="post" action="?resid='.$resid.'">
+                <h3 class="mb-4">Change reservation info:</h3>
+                <div class="row">
+                    <div class="col form-group">
+                    <label for="datefrom">Date from:</label>
+                        <input type="date" class="col form-control" id="datefrom">
+                    </div>
+                    <div class="col form-group">
+                    <label for="dateto">Date to:</label>
+                        <input type="date" class="col form-control" id="dateto">
+                    </div>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="status">
-                    <label class="form-check-label" for="status">Status: </label>
+                    <label class="form-check-label" for="status">Status</label>
                 </div>
-                <div class="form-check">
+                <div class="form-check mb-2">
                     <input type="checkbox" class="form-check-input" id="confirmed">
-                    <label class="form-check-label" for="confirmed">Confirmed: </label>
+                    <label class="form-check-label" for="confirmed">Confirmed</label>
                 </div>
                 <input type="submit" class="btn btn-secondary text-light" value="Update">
             </form>
         <?php endif;?>
-
-<a class="justify-content-right btn btn-secondary" href="admin_profile_page">Admin homepage</a>
+<div class="mt-3 container">
+    <a class="justify-content-right btn btn-secondary" href="admin_profile_page.php">Admin homepage</a>
+</div>
 </body>
 </html>

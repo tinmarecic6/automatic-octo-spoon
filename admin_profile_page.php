@@ -40,7 +40,7 @@
        <div class="col col-lg-2 p-4 text-center banner ">
        <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="media/person-fill.svg" alt="userpic" height="30" title="userpic">
+            <img src="media/profile_white.png" alt="userpic" height="30" title="userpic">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <h6 class="dropdown-header text-center">
@@ -150,7 +150,7 @@
               foreach($reservation as $res){
                 echo '<td>'.$res.'</td>';
               }
-              var_dump($reservation);
+              //var_dump($reservation);
               echo '<td><a href="admin_edit.php?resid='.$reservation['Reservation_ID'].'">Edit</a></td>';
               echo '<td><a href="admin_delete.php?resid='.$reservation['Reservation_ID'].'">Delete</a></td>';
               echo '</tr>';
