@@ -13,27 +13,38 @@
     <title>Edit info</title>
   </head>
 
-  <?php
+  <!--user type test-->
+  <?php 
+    require_once('scripts/db.php');
+    $conn = db();
+    session_start();
+    if($_SESSION['Type_ID']=='1' ){
+      #Do nothing, display admin page
+    }
+    else {
+      #user is not admin, return to homepage
+      header("Location: homepage.php");
+    }
 
 /* USERI */
-
-if(isset($_GET['userid']) && $_GET['userid']!='' ){
-    $userid = $_GET['userid'];
-}
+    if(isset($_GET['userid']) && $_GET['userid']!='' ){
+        $userid = $_GET['userid'];
+    }
+/*Cisto da znas tino, POST hvata sva polja iz form tagova po name-u ne po id-u(podsjetnik) */
     if(isset($_POST['username']) && $_POST['username']!= ''){
         $sql_update_username = 'UPDATE `user` SET `Username`="'.$_POST['username'].'" WHERE `User_ID` = '.$userid.';';
         echo $sql_update_username;
         $sql_update_username='';
         echo 'izvrsavam query';
     };
-    if(isset($_POST['first_name']) && $_POST['first_name']!= ''){
-        $sql_update_first_name = 'UPDATE `user` SET `First_name`="'.$_POST['first_name'].'" WHERE `User_ID` = '.$userid.';';
+    if(isset($_POST['firstname']) && $_POST['firstname']!= ''){
+        $sql_update_first_name = 'UPDATE `user` SET `First_name`="'.$_POST['firstname'].'" WHERE `User_ID` = '.$userid.';';
         echo $sql_update_first_name;
         $sql_update_first_name='';
         echo 'izvrsavam query';
     };
-    if(isset($_POST['last_name']) && $_POST['last_name']!= ''){
-        $sql_update_last_name = 'UPDATE `user` SET `Last_name`="'.$_POST['last_name'].'" WHERE `User_ID` = '.$userid.';';
+    if(isset($_POST['lastname']) && $_POST['lastname']!= ''){
+        $sql_update_last_name = 'UPDATE `user` SET `Last_name`="'.$_POST['lastname'].'" WHERE `User_ID` = '.$userid.';';
         echo $sql_update_last_name;
         $sql_update_last_name='';
         echo 'izvrsavam query';
@@ -44,8 +55,8 @@ if(isset($_GET['userid']) && $_GET['userid']!='' ){
         $sql_update_user_image='';
         echo 'izvrsavam query';
     };
-    if(isset($_POST['type_id']) && $_POST['type_id']!= ''){
-        $sql_update_type_id = 'UPDATE `user` SET `Type_id`="'.$_POST['type_id'].'" WHERE `User_ID` = '.$userid.';';
+    if(isset($_POST['typeid']) && $_POST['typeid']!= ''){
+        $sql_update_type_id = 'UPDATE `user` SET `Type_id`="'.$_POST['typeid'].'" WHERE `User_ID` = '.$userid.';';
         echo $sql_update_type_id;
         $sql_update_type_id='';
         echo 'izvrsavam query';
@@ -65,18 +76,18 @@ if(isset($_GET['userid']) && $_GET['userid']!='' ){
 
 /* OBJEKTI */
     if(isset($_GET['objid']) && $_GET['objid']!='' ){
-    $objid = $_GET['objid'];   
+        $objid = $_GET['objid'];   
     }
-if(isset($_POST['object_name']) && $_POST['object_name']!= ''){
-    $sql_update_object_name = 'UPDATE `object` SET `Object_name`="'.$_POST['object_name'].'" WHERE `Object_ID` = '.$objid.';';
-    $sql_update_object_name='';
-    echo 'izvrsavam query';
-};
-if(isset($_POST['price']) && $_POST['price']!= ''){
-    $sql_update_price = 'UPDATE `object` SET `Price`="'.$_POST['price'].'" WHERE `Object_ID` = '.$objid.';';
-    echo $sql_update_price;
-    $sql_update_price='';
-    echo 'izvrsavam query';
+    if(isset($_POST['object_name']) && $_POST['object_name']!= ''){
+        $sql_update_object_name = 'UPDATE `object` SET `Object_name`="'.$_POST['object_name'].'" WHERE `Object_ID` = '.$objid.';';
+        $sql_update_object_name='';
+        echo 'izvrsavam query';
+    };
+    if(isset($_POST['price']) && $_POST['price']!= ''){
+        $sql_update_price = 'UPDATE `object` SET `Price`="'.$_POST['price'].'" WHERE `Object_ID` = '.$objid.';';
+        echo $sql_update_price;
+        $sql_update_price='';
+        echo 'izvrsavam query';
 };
 
 /* REZERVACIJE */
@@ -112,54 +123,29 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
 </head>
 <body>
 
-    <!--user type test-->
-    <?php 
-    require_once('scripts/db.php');
-    $conn = db();
-    session_start();
-    if($_SESSION['Type_ID']=='1' ){
-      #Do nothing, display admin page
-    }
-    else {
-      #user is not admin, return to homepage
-      header("Location: homepage.php");
-      
-    }
-
-        
-
-        echo
-        '
-            <form class="container mt-5 pt-4" name="edituser" method="post" action="?userid='.$userid.'">
+<!--User info edit-->
+    <?php if(isset($_GET['userid'])): ?>
+         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid="<?php echo $userid;?>">
                 <h3>Change user info:</h3><br>
                 <div class="row">
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                     </div>
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="firstname" placeholder="First name">
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
                     </div>
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="lastname" placeholder="Last name">
+                        <input type="text" class="form-control" id="lastname" name="lastname"placeholder="Last name">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col form-group">
                         <label class="col" for="password">Password:</label>
-                        <input type="text" class="form-control" id="password">
+                        <input type="text" class="form-control" id="password" name="password">
                     </div>
                     <div class="col">
                             <label class="col" for="typeid">Type ID:</label>
-                            <select class="col form-control" id="typeid" placeholder="Type ID">';
-                            echo 'test';
-                            $sql_user_type = "SELECT * FROM `user_type`;";
-                            $result = $conn->query($sql_user_type);
-                                $row_ut = $result->fetch_assoc();
-                                while($row = $result->fetch_assoc())
-                                    {
-                                        echo '<option value='.$row['Type_ID'].'>'.$row['Type_name'].'</option>';
-                                    };
-                        echo '
+                            <select class="col form-control" id="typeid" name="typeid" placeholder="Type ID">';
                             </select>
                     </div>
                 </div>
@@ -168,23 +154,21 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <label for="userimage">User image:</label>
                         <input type="file" class="form-control-file" id="userimage">
                     </div>
-                    <div class="col"
+                    <div class="col">
                         <div class="row form-group">              
-                                <label class="col " for="dob">Date of birth:</label>
+                                <label class="col" for="dob">Date of birth:</label>
                                 </div>
-                                <input type="date" class="col form-control mr-3" id="dob">
+                                <input type="date" class="col form-control mr-3" name="dob" id="dob">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-secondary text-light">Update</button>
+                <input type="submit" class="btn btn-secondary text-light" value="Update">
             </form>
-        ';
-
-        if(isset($_POST['objid'])){ 
-        echo
-        '
+        <?php endif;?>
+<!--Object info edit-->
+        <?php if(isset($_GET['objid'])): ?>
             <form class="container" name="editobj" method="post" action="?objid='.$objid.'">
                 Change object info:<br><br>
                 <div class="row">
@@ -195,13 +179,11 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <input type="number" class="form-control" id="price" placeholder="Price">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-secondary text-light">Update</button>
+                <input type="submit" class="btn btn-secondary text-light" valeu="Update">
             </form>
-        ';
-        }
-        if(isset($_POST['resid'])){                                
-        echo
-        '
+        <?php endif;?>
+<!--Reservation info edit-->
+        <?php if(isset($_GET['resid'])): ?>                               
             <form class="container" name="editres" method="post" action="?resid='.$resid.'">
                 Change reservation info:<br><br>
                 <div class="form-group">
@@ -220,11 +202,10 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                     <input type="checkbox" class="form-check-input" id="confirmed">
                     <label class="form-check-label" for="confirmed">Confirmed: </label>
                 </div>
-                <button type="submit" class="btn btn-secondary text-light">Update</button>
+                <input type="submit" class="btn btn-secondary text-light" value="Update">
             </form>
-        ';
-        }
-    ?>
+        <?php endif;?>
 
+<a class="justify-content-right btn btn-secondary" href="admin_profile_page">Admin homepage</a>
 </body>
 </html>
