@@ -55,6 +55,8 @@
         <!--if pic property of user table is empty show stock image-->
           <div class="text-center pt-3" style="width:100%">
               <div class="navbar-brand"><a href="homepage.php">Home</a></div><br>
+              <!-- ovdje treba dodati da link "my profile" vodi na skriptu koja ce ovisno o user_id-u 
+              voditi ili na user_profile_page.php ili na host_profile_page.php -->
               <div class="navbar-brand"><a href="user_profile_page.php">My profile</a></div>
           </div>
         </div>
