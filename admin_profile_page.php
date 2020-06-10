@@ -94,7 +94,7 @@
                 }
                 //var_dump($user);
                 echo '<td><a href="admin_edit.php?userid='.$user['User_ID'].'">Edit</a></td>';
-                echo '<td>Delete</td>';
+                echo '<td><a href="admin_delete.php?userid='.$user['User_ID'].'">Delete</a></td>';
                 echo '</tr>';
               }
           echo
@@ -118,11 +118,11 @@
             <th>Delete</th></tr></thead>';
               foreach($result_all_obj as $obj){
                 echo '<tr>';
-                foreach($obj as $obj){
-                  echo '<td>'.$obj.'</td>';
-                  echo '<td><a href="admin_edit.php?userid='.$obj['Object_ID'].'">Edit</a></td>';
-                  echo '<td><a href="admin_edit.php?userid='.$user['User_ID'].'">Edit</a></td>';
+                foreach($obj as $col){
+                  echo '<td>'.$col.'</td>';
                 }
+                echo '<td><a href="admin_edit.php?objid='.$obj['Object_ID'].'">Edit</a></td>';
+                echo '<td><a href="admin_delete.php?objid='.$obj['Object_ID'].'">Delete</a></td>';
                 echo '</tr>';
               }
           echo
@@ -149,11 +149,10 @@
               echo '<tr>';
               foreach($reservation as $res){
                 echo '<td>'.$res.'</td>';
-                
               }
               var_dump($reservation);
               echo '<td><a href="admin_edit.php?resid='.$reservation['Reservation_ID'].'">Edit</a></td>';
-              echo '<td>Delete</td>';
+              echo '<td><a href="admin_delete.php?resid='.$reservation['Reservation_ID'].'">Delete</a></td>';
               echo '</tr>';
             }
         echo
