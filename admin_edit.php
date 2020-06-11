@@ -30,6 +30,15 @@
     if(isset($_GET['userid']) && $_GET['userid']!='' ){
         $userid = $_GET['userid'];
     }
+/* OBJEKTI */
+    if(isset($_GET['objid']) && $_GET['objid']!='' ){
+        $objid = $_GET['objid'];
+    }
+/* REZERVACIJE */
+    if(isset($_GET['resid']) && $_GET['resid']!='' ){
+        $resid = $_GET['resid'];
+    }
+
 /*Cisto da znas tino, POST hvata sva polja iz form tagova po name-u ne po id-u(podsjetnik) */
     if(isset($_POST['username']) && $_POST['username']!= ''){
         $sql_update_username = 'UPDATE `user` SET `Username`="'.$_POST['username'].'" WHERE `User_ID` = '.$userid.';';
@@ -78,7 +87,7 @@
     if(isset($_GET['objid']) && $_GET['objid']!='' ){
         $objid = $_GET['objid'];   
     }
-    var_dump($objid);
+    
     if(isset($_POST['object_name']) && $_POST['object_name']!= ''){
         $sql_update_object_name = 'UPDATE `object` SET `Object_name`="'.$_POST['object_name'].'" WHERE `Object_ID` = '.$objid.';';
         $sql_update_object_name='';
@@ -92,33 +101,33 @@
 };
 
 /* REZERVACIJE */
-if(isset($_GET['resid']) && $_GET['resid']!='' ){
-$resid = $_GET['resid'];
-}
-if(isset($_POST['date_from']) && $_POST['date_from']!= ''){
-    $sql_update_date_from = 'UPDATE `reservation` SET `Date_from`="'.$_POST['date_from'].'" WHERE `Reservation_ID` = '.$resid.';';
-    echo $sql_update_date_from;
-    $sql_update_date_from='';
-    echo 'izvrsavam query';
-};
-if(isset($_POST['date_to']) && $_POST['date_to']!= ''){
-    $sql_update_date_to = 'UPDATE `reservation` SET `Date_to`="'.$_POST['date_to'].'" WHERE `Reservation_ID` = '.$resid.';';
-    echo $sql_update_date_to;
-    $sql_update_date_to='';
-    echo 'izvrsavam query';
-};
-if(isset($_POST['status']) && $_POST['status']!= ''){
-    $sql_update_status = 'UPDATE `reservation` SET `Status`="'.$_POST['status'].'" WHERE `Reservation_ID` = '.$resid.';';
-    echo $sql_update_status;
-    $sql_update_status='';
-    echo 'izvrsavam query';
-};
-if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
-    $sql_update_confirmed = 'UPDATE `reservation` SET `Confirmed`="'.$_POST['confirmed'].'" WHERE `Reservation_ID` = '.$resid.';';
-    echo $sql_update_confirmed;
-    $sql_update_confirmed='';
-    echo 'izvrsavam query';
-};
+    if(isset($_GET['resid']) && $_GET['resid']!='' ){
+    $resid = $_GET['resid'];
+    }
+    if(isset($_POST['date_from']) && $_POST['date_from']!= ''){
+        $sql_update_date_from = 'UPDATE `reservation` SET `Date_from`="'.$_POST['date_from'].'" WHERE `Reservation_ID` = '.$resid.';';
+        echo $sql_update_date_from;
+        $sql_update_date_from='';
+        echo 'izvrsavam query';
+    };
+    if(isset($_POST['date_to']) && $_POST['date_to']!= ''){
+        $sql_update_date_to = 'UPDATE `reservation` SET `Date_to`="'.$_POST['date_to'].'" WHERE `Reservation_ID` = '.$resid.';';
+        echo $sql_update_date_to;
+        $sql_update_date_to='';
+        echo 'izvrsavam query';
+    };
+    if(isset($_POST['status']) && $_POST['status']!= ''){
+        $sql_update_status = 'UPDATE `reservation` SET `Status`="'.$_POST['status'].'" WHERE `Reservation_ID` = '.$resid.';';
+        echo $sql_update_status;
+        $sql_update_status='';
+        echo 'izvrsavam query';
+    };
+    if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
+        $sql_update_confirmed = 'UPDATE `reservation` SET `Confirmed`="'.$_POST['confirmed'].'" WHERE `Reservation_ID` = '.$resid.';';
+        echo $sql_update_confirmed;
+        $sql_update_confirmed='';
+        echo 'izvrsavam query';
+    };
 
 ?>
 </head>
@@ -126,17 +135,24 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
 
 <!--User info edit-->
     <?php if(isset($_GET['userid'])): ?>
-         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid=<?php echo $userid;?>">
-                <h3>Change user info:</h3><br>
+        <?php 
+        #getting user info from db
+            $sql_user = 'SELECT * from `user` where User_ID ="'.$_GET['userid'].'";';
+            $result_user = $conn->query($sql_user);
+            $user =$result_user->fetch_assoc();
+            
+        ?>
+         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid=<?php echo $userid; ?>">
+                <h3 class="mb-5">Change user info:</h3>
                 <div class="row">
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo $user['Username']; ?>">
                     </div>
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="<?php echo $user['First_name']; ?>">
                     </div>
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="lastname" name="lastname"placeholder="Last name">
+                        <input type="text" class="form-control" id="lastname" name="lastname"placeholder="<?php echo $user['Last_name']; ?>">
                     </div>
                 </div>
                 <div class="row">
@@ -165,11 +181,11 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center mt-3">
+                <div class="row justify-content-center mt-5">
                     <input type="submit" class="col-2 btn btn-secondary text-light" value="Update">
                 </div>
                 <div class="row justify-content-center mt-3">
-                    <a class="col-2 nesto btn btn-secondary" href="admin_profile_page">Admin homepage</a>
+                    <a class="col-2 btn btn-secondary" href="admin_profile_page.php">Admin homepage</a>
                 </div>
             </form>
         <?php endif;?>
@@ -182,12 +198,9 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
             $object =$result_obj->fetch_assoc();
             
         ?>
-            <form class="container" name="editobj" method="post" action="objid=<?php echo $_GET['objid']; ?>">
-                <div class="row">
-                    <div class="col m-4">
-                        <h3>Change object info:</hr>
-                    </div>
-                </div>
+            <form class="container mt-5 pt-4" name="editobj" method="POST" action="?objid=<?php echo $objid; ?>">
+                <h3 class="mb-5">Change object info:</h3>
+                
                 <div class="row">
                     <div class="col form-group">
                         <input type="text" class="form-control" id="objectname" name="objectname" placeholder="<?php echo $object['Object_name']; ?>">
@@ -196,36 +209,40 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <input type="number" class="form-control" id="price" name="price" placeholder="<?php echo $object['Price']; ?>">
                     </div>
                 </div>
-                <div class="row justify-content-center mt-3">
-                    <input type="submit" class="btn btn-secondary text-light" value="Update">
+                <div class="row justify-content-center mt-5">
+                    <input type="submit" class="col-2 btn btn-secondary text-light" value="Update">
                 </div>
                 <div class="row justify-content-center mt-3">
-                    <a class="col-2 nesto btn btn-secondary" href="admin_profile_page">Admin homepage</a>
+                    <a class="col-2 btn btn-secondary" href="admin_profile_page.php">Admin homepage</a>
                 </div>
             </form>
         <?php endif;?>
 <!--Reservation info edit-->
         <?php if(isset($_GET['resid'])): ?>
-        <!--action treba promjenit-->                               
-            <form class="container" name="editres" method="post" action="?resid='.$resid.'">
-                <h3>Change reservation info:</h3>
+            <form class="container mt-5 pt-4" name="editres" method="POST" action="?resid=<?php echo $resid; ?>">
+                <h3 class="mb-5">Change reservation info:</h3>
                 <div class="form-group">
                 <label for="datefrom">Date from:</label>
                     <input type="date" class="form-control" name="datefrom" id="datefrom">
                 </div>
                 <div class="form-group">
                 <label for="dateto">Date to:</label>
-                    <input type="text" class="form-control" name="dateto" id="dateto">
+                    <input type="date" class="form-control" name="dateto" id="dateto">
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="status" id="status">
-                    <label class="form-check-label" for="status">Status: </label>
+                    <label class="form-check-label" for="status">Status</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="confirmed" id="confirmed">
-                    <label class="form-check-label" for="confirmed">Confirmed: </label>
+                    <label class="form-check-label" for="confirmed">Confirmed</label>
                 </div>
-                <input type="submit" class="btn btn-secondary text-light" value="Update">
+                <div class="row justify-content-center mt-5">
+                    <input type="submit" class="col-2 btn btn-secondary text-light" value="Update">
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <a class="col-2 btn btn-secondary" href="admin_profile_page.php">Admin homepage</a>
+                </div>
             </form>
         <?php endif;?>
 
