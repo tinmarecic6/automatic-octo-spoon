@@ -17,7 +17,7 @@
    <div class="container-fluid">
      <div class="row justify-content-md-center">
        <div class="col col-lg-2 text-center p-4 banner">
-       <a href="homepage.php"><img src="media/CROBOOK_logo.png" alt="logo" width="200"></a>
+       <a href="homepage.php"><img src="media/crobook_logo_white.png" alt="logo" width="200"></a>
         </div>
        <div class="col-md-auto col-lg-5 ">
          <?php 
