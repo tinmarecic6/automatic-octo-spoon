@@ -203,8 +203,7 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                     </div>
                 </div>
 =======
-            <form class="container mt-5 pt-4" name="editobj" method="post" action="?objid='.$objid.'">
-                <h3 class="mb-4">Change object info:</h3>
+            
 >>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
                 <div class="row">
                     <div class="col form-group">
@@ -244,30 +243,7 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                     <input type="checkbox" class="form-check-input" name="confirmed" id="confirmed">
                     <label class="form-check-label" for="confirmed">Confirmed: </label>
 =======
-                <input type="submit" class="btn btn-secondary text-light" value="Update">
-            </form>
-        <?php endif;?>
-<!--Reservation info edit-->
-        <?php if(isset($_GET['resid'])): ?>                               
-            <form class="container mt-5 pt-4" name="editres" method="post" action="?resid='.$resid.'">
-                <h3 class="mb-4">Change reservation info:</h3>
-                <div class="row">
-                    <div class="col form-group">
-                    <label for="datefrom">Date from:</label>
-                        <input type="date" class="col form-control" id="datefrom">
-                    </div>
-                    <div class="col form-group">
-                    <label for="dateto">Date to:</label>
-                        <input type="date" class="col form-control" id="dateto">
-                    </div>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="status">
-                    <label class="form-check-label" for="status">Status</label>
-                </div>
-                <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="confirmed">
-                    <label class="form-check-label" for="confirmed">Confirmed</label>
+      
 >>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
                 </div>
                 <input type="submit" class="btn btn-secondary text-light" value="Update">
@@ -277,9 +253,6 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
 
 
 =======
-<div class="mt-3 container">
-    <a class="justify-content-right btn btn-secondary" href="admin_profile_page.php">Admin homepage</a>
-</div>
 >>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
 </body>
 </html>
