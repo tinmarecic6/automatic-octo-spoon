@@ -78,6 +78,7 @@
     if(isset($_GET['objid']) && $_GET['objid']!='' ){
         $objid = $_GET['objid'];   
     }
+    var_dump($objid);
     if(isset($_POST['object_name']) && $_POST['object_name']!= ''){
         $sql_update_object_name = 'UPDATE `object` SET `Object_name`="'.$_POST['object_name'].'" WHERE `Object_ID` = '.$objid.';';
         $sql_update_object_name='';
@@ -125,7 +126,7 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
 
 <!--User info edit-->
     <?php if(isset($_GET['userid'])): ?>
-         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid="<?php echo $userid;?>">
+         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid=<?php echo $userid;?>">
                 <h3>Change user info:</h3><br>
                 <div class="row">
                     <div class="col form-group">
@@ -158,54 +159,76 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <div class="row form-group">              
                                 <label class="col" for="dob">Date of birth:</label>
                                 </div>
-                                <input type="date" class="col form-control mr-3" name="dob" id="dob">
+                                    <input type="date" class="col form-control mr-3" name="dob" id="dob">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-secondary text-light" value="Update">
+                <div class="row justify-content-center mt-3">
+                    <input type="submit" class="col-2 btn btn-secondary text-light" value="Update">
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <a class="col-2 nesto btn btn-secondary" href="admin_profile_page">Admin homepage</a>
+                </div>
             </form>
         <?php endif;?>
 <!--Object info edit-->
         <?php if(isset($_GET['objid'])): ?>
-            <form class="container" name="editobj" method="post" action="?objid='.$objid.'">
-                Change object info:<br><br>
+        <?php 
+        #getting object info from db
+            $sql_object = 'SELECT * from object where object_id ="'.$_GET['objid'].'";';
+            $result_obj = $conn->query($sql_object);
+            $object =$result_obj->fetch_assoc();
+            
+        ?>
+            <form class="container" name="editobj" method="post" action="objid=<?php echo $_GET['objid']); ?>">
                 <div class="row">
-                    <div class="col form-group">
-                        <input type="text" class="form-control" id="objectname" placeholder="Object name">
-                    </div>
-                    <div class="col form-group">
-                        <input type="number" class="form-control" id="price" placeholder="Price">
+                    <div class="col m-4">
+                        <h3>Change object info:</hr>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-secondary text-light" valeu="Update">
+                <div class="row">
+                    <div class="col form-group">
+                        <input type="text" class="form-control" id="objectname" name="objectname" placeholder="<?php echo $object['Object_name']; ?>">
+                    </div>
+                    <div class="col form-group">
+                        <input type="number" class="form-control" id="price" name="price" placeholder="<?php echo $object['Price']; ?>">
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <input type="submit" class="btn btn-secondary text-light" value="Update">
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <a class="col-2 nesto btn btn-secondary" href="admin_profile_page">Admin homepage</a>
+                </div>
             </form>
         <?php endif;?>
 <!--Reservation info edit-->
-        <?php if(isset($_GET['resid'])): ?>                               
+        <?php if(isset($_GET['resid'])): ?>
+        <!--action treba promjenit-->                               
             <form class="container" name="editres" method="post" action="?resid='.$resid.'">
-                Change reservation info:<br><br>
+                <h3>Change reservation info:</h3>
                 <div class="form-group">
                 <label for="datefrom">Date from:</label>
-                    <input type="date" class="form-control" id="datefrom">
+                    <input type="date" class="form-control" name="datefrom" id="datefrom">
                 </div>
                 <div class="form-group">
                 <label for="dateto">Date to:</label>
-                    <input type="text" class="form-control" id="dateto">
+                    <input type="text" class="form-control" name="dateto" id="dateto">
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="status">
+                    <input type="checkbox" class="form-check-input" name="status" id="status">
                     <label class="form-check-label" for="status">Status: </label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="confirmed">
+                    <input type="checkbox" class="form-check-input" name="confirmed" id="confirmed">
                     <label class="form-check-label" for="confirmed">Confirmed: </label>
                 </div>
                 <input type="submit" class="btn btn-secondary text-light" value="Update">
             </form>
         <?php endif;?>
 
-<a class="justify-content-right btn btn-secondary" href="admin_profile_page">Admin homepage</a>
+
 </body>
 </html>
