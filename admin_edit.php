@@ -126,13 +126,8 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
 
 <!--User info edit-->
     <?php if(isset($_GET['userid'])): ?>
-<<<<<<< HEAD
          <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid=<?php echo $userid;?>">
                 <h3>Change user info:</h3><br>
-=======
-         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid='.$userid.'">
-                <h3 mb-4>Change user info:</h3>
->>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
                 <div class="row">
                     <div class="col form-group">
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username">
@@ -161,19 +156,11 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <input type="file" class="form-control-file" id="userimage">
                     </div>
                     <div class="col">
-<<<<<<< HEAD
                         <div class="row form-group">              
                                 <label class="col" for="dob">Date of birth:</label>
                                 </div>
                                     <input type="date" class="col form-control mr-3" name="dob" id="dob">
                                 </div>
-=======
-                        <div class="form-group">              
-                            <label for="dob">Date of birth:</label>
-                        </div>
-                            <input type="date" class="col form-control" name="dob" id="dob">
-                        </div>
->>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
                             </div>
                         </div>
                     </div>
@@ -188,7 +175,6 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
         <?php endif;?>
 <!--Object info edit-->
         <?php if(isset($_GET['objid'])): ?>
-<<<<<<< HEAD
         <?php 
         #getting object info from db
             $sql_object = 'SELECT * from object where object_id ="'.$_GET['objid'].'";';
@@ -196,15 +182,12 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
             $object =$result_obj->fetch_assoc();
             
         ?>
-            <form class="container" name="editobj" method="post" action="objid=<?php echo $_GET['objid']); ?>">
+            <form class="container" name="editobj" method="post" action="objid=<?php echo $_GET['objid']; ?>">
                 <div class="row">
                     <div class="col m-4">
                         <h3>Change object info:</hr>
                     </div>
                 </div>
-=======
-            
->>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
                 <div class="row">
                     <div class="col form-group">
                         <input type="text" class="form-control" id="objectname" name="objectname" placeholder="<?php echo $object['Object_name']; ?>">
@@ -213,7 +196,6 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                         <input type="number" class="form-control" id="price" name="price" placeholder="<?php echo $object['Price']; ?>">
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div class="row justify-content-center mt-3">
                     <input type="submit" class="btn btn-secondary text-light" value="Update">
                 </div>
@@ -242,17 +224,11 @@ if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="confirmed" id="confirmed">
                     <label class="form-check-label" for="confirmed">Confirmed: </label>
-=======
-      
->>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
                 </div>
                 <input type="submit" class="btn btn-secondary text-light" value="Update">
             </form>
         <?php endif;?>
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 34b9b718fa26d9db93cac2a966c12a4486c824a4
 </body>
 </html>
