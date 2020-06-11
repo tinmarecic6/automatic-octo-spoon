@@ -58,44 +58,39 @@
             if(isset($_POST['fname']) && $_POST['fname']!==''){
               $sql_update_fname = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_fname);
-              unset($_POST);
-              echo 'mjenjam ime';
+
               
             } 
             if(isset($_POST['lname']) && $_POST['lname']!==''){
               $sql_update_lname = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_lname);
-              unset($_POST);
-              echo 'mjenjam prezime';
+              $_POST = array();
+              header("Refresh:1");
             }
             
             if(isset($_POST['dob']) && $_POST['dob']!==''){
               $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_dob);
-              unset($_POST);
-              echo 'mjenjam dob';
             }
-            #fix duplicate pic creation and remove post after upload
-            if(isset($_FILES['profile_pic']['tmp_name'])){
-              $target_dir = "media/pictures/";
-              $ext = pathinfo($_FILES['profile_pic']['name']);
-              $target_file = $target_dir . rand() .'.'.$ext['extension'];
-              $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$_SESSION['User_ID'].';';
-              if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)) {
-                $conn->query($sql_update_profile_pic);
-                echo 'mjenjam sliku';
-                unset($_FILES);
-
-
+            if(isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error']!=4){
+              if(isset($_FILES['profile_pic']['tmp_name'])){
+                $target_dir = "media/pictures/";
+                $ext = pathinfo($_FILES['profile_pic']['name']);
+                $target_file = $target_dir . rand() .'.'.$ext['extension'];
+                $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$_SESSION['User_ID'].';';
+                if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)==1) {
+                  $conn->query($sql_update_profile_pic);
+                  $_FILES = array();
+                  header("Refresh:1");
+                }
+                else {
+                  echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
+                  There was an error uploading your picture!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button></div>';
+                }
               } 
-              else {
-                echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
-                There was an error uploading your picture!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button></div>';
-              }
-              
             }
             ?>
       </div>
@@ -129,7 +124,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
+                      <h5 class="modal-title text-dark" id="exampleModalLabel">
                       <?php
                       #username-title
                       echo $row['First_name'].'   '.$row['Last_name'];
@@ -138,12 +133,12 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body text-center">
+                    <div class="modal-body text-center text-dark">
                       <form enctype="multipart/form-data" name="edit_info" method="POST"  acton="?user=<?php echo $_SESSION['User_ID']; ?>">
-                        First name: <input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"><br>
-                        Last name:  <input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"><br>
-                        Date of birth: <input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>
-                        Upload or change your profile picture: <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
+                        First name: <input type="text" name="fname" class="m-2 text-dark" placeholder="<?php echo $row['First_name']; ?>"><br>
+                        Last name:  <input type="text" name="lname" class="m-2 text-dark" placeholder="<?php echo $row['Last_name']; ?>"required><br>
+                        Date of birth: <input type="date" name="dob" class="m-2 text-dark" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>
+                        Upload or change your profile picture:<br> <input type="file" class="form-control-file text-dark" name="profile_pic" id="profile_pic">
                         </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -160,6 +155,9 @@
               </div>
           </div>
         </div>
+        <?php 
+          $sql
+        ?>
         <!--if has no past reservations show "You have no reservations, make your first!-->
          <div class="col col-md-7 text-center reservations_p shadow"><h3 class="mt-4">Your past reservations</h3>
           <!--reservation info goes here-->
@@ -174,16 +172,19 @@
               echo '<div class="col col-sm-3 m-2">
               <div class="card" >
                   <div class="card-body">
-                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
+                    <h5 class="card-title text-dark"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
                     <h6 class="card-subtitle  text-muted">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
                     <hr>
-                    <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
-                    <a href="#" class="card-link">View info</a>
-                    <a href="#" class="card-link">Delete</a>
+                    <p class="card-text text-dark ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
+                    <a href="delete_res.php?resid="'.$rv['Reservation_ID'].'"" class="text-primary card-link">Delete</a>
                   </div>
                 </div>
               </div>'; 
           }
+        }
+        else{
+          echo '<div class="mt-4 text-light">You have no reservations, reserve now!';
+          echo '<div class="row"><a href="new_res.php" class="col m-3 btn btn-warning"><h4>Reserve here</h4></a></div>';
         }
           ?>
             </div>
