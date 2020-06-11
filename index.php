@@ -15,7 +15,7 @@
         <!--Napravi banner s logom i user id-em-->
       <div class="row justify-content-center">
           <div class="col-3">
-              <img src="media/CROBOOK_logo.png" alt="logusina" height="200">
+              <img src="media/crobook_logo_white.png" alt="logusina" height="200">
           </div>
           <div class="col-4 display-1 font-weight-bold align-self-center">
               CRO-BOOK
