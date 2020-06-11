@@ -43,6 +43,7 @@
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
@@ -57,7 +58,7 @@
               <div class="navbar-brand"><a href="homepage.php">Home</a></div><br>
               <!-- ovdje treba dodati da link "my profile" vodi na skriptu koja ce ovisno o user_id-u 
               voditi ili na user_profile_page.php ili na host_profile_page.php -->
-              <div class="navbar-brand"><a href="user_profile_page.php">My profile</a></div>
+              <div class="navbar-brand"><a href="profile_redirect.php">My profile</a></div>
           </div>
         </div>
         <!--if has no past reservations show "You have no reservations, make your first!-->

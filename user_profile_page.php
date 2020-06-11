@@ -45,6 +45,7 @@
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>  
@@ -155,7 +156,7 @@
               </div>
               <hr>
               <div class="row m-4 justify-content-md-center">
-              <a class="btn btn-secondary text-light" href="become_host.php" >Become a host</a>
+              <a class="btn btn-secondary text-light" href="become_host.php" >Become a host!</a>
               </div>
           </div>
         </div>
