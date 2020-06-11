@@ -43,6 +43,7 @@
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>

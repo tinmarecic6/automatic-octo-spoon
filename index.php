@@ -13,8 +13,16 @@
   <body>
       <div class="w-100 p-3 text-center" id="navigacija">
         <!--Napravi banner s logom i user id-em-->
-      <div class="display-3 p-5 mb-5">IME STRANICE OKO KOJEG SE JOS NISMO DOGOVRILI</div>
-      </div> 
+      <div class="row justify-content-center">
+          <div class="col-3">
+              <img src="media/CROBOOK_logo.png" alt="logusina" height="200">
+          </div>
+          <div class="col-4 display-1 font-weight-bold align-self-center">
+              CRO-BOOK
+          </div>
+      </div>
+     <!-- <div class="display-3 p-5 mb-5">SALVATORE GANAČEVIĆ</div>-->
+      </div>
   <!--napravi login form-->
     <div class="container-fluid">
       <!--sluzi za pomaknuti login form i nesto o nama par piksela dolje-->
@@ -86,10 +94,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-4 m-2 p-5 nesto_nama">
+            <div class="col-sm-4 m-1 p-3 nesto_nama">
               Looking for a place to stay on your next vacation?
               <br>
-              We are here to help with that, simply login and start searching, it is really easy!
+              We are here to help with that, simply login and start searching, it is that easy!
             </div>
         </div>
         <div class="row-fluid">
