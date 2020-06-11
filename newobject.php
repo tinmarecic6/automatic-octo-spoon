@@ -46,69 +46,43 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
-        </div>
-            
+        </div> 
       </div>
      </div>
-     <!--User info - ovdje ide navigacija--> 
-     <div class="row justify-content-md-center">
-       <div class="col col-md-2 user_info navigacija">
-        <!--if pic property of user table is empty show stock image-->
-          <div class="text-center pt-3" style="width:100%">
-              <div class="navbar-brand"><a href="homepage.php">Home</a></div><br>
-              <div class="navbar-brand"><a href="user_profile_page.php">My profile</a></div>
-          </div>
-        </div>
-        <!--if has no past reservations show "You have no reservations, make your first!-->
-         <div class="col col-md-7 text-center reservations_p shadow pt-5"><h3>Your next vacation</h3>
-          <!--reservation info goes here-->
-          <div class="text-left">
-          <div class="container-fluid">
-            <div class="row justify-content-center mt-5">
-          <?php
 
-          for($i = 0;$i<15;$i++){
-            echo'
-                <div class="col col-sm-12 m-3">
-                  <div class="card kartice">
-                    <div class="card-body">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-2">
-                            <img src="media/sg.jpeg" alt="slika" width="100%"></img>
-                          </div>
-                          <div class="col-7">
-                            <div class="row">
-                              Host: Pero Perić
-                            </div>
-                            <br>
-                            <div class="row">
-                              Description:<br>
-                              Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
-                            </div>
-                          </div>
-                          <div class="col text-right">
-                            Price for one night: <br>
-                            1.000,00 HRK
-                          </div>
-                        </div>
-                      </div>
+     <form class="container mt-3 pt-4" name="newobj" method="POST" action="?newobj=<?php echo $objid; ?>">
+                <h3 class="mb-5">Object info:</h3>
+                
+                <div class="row">
+                    <div class="col form-group">
+                        <input type="text" class="form-control" id="objectname" name="objectname" placeholder="Object name">
                     </div>
+                    <div class="col form-group">
+                        <input type="number" class="form-control" id="price" name="price" placeholder="Price">
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-1 align-self-center">
+                    Location:
                   </div>
-              </div>
-              ';}
-          ?>
-          
-            </div>
-          </div>
-         </div>
-      </div>
-   </div>
+                  <div class="col">
+                      <select class="form-control" id="locationid" name="locationid">';
+                      </select>
+                  </div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                    <input type="submit" class="col-2 btn btn-secondary text-light" value="Host">
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <a class="col-2 btn btn-secondary" href="host_profile_page.php">My profile</a>
+                </div>
+            </form>
 
-    
- 
-           
-            
+          <?php
+            #$sql_unos = 'INSERT INTO `object` (`Object_ID`, `Object_name`, `Price`, `Location_ID`, `User_ID`) VALUES (NULL, 'objectname', 'price', 'locationid', '$_SESSION['User_ID']')';
+            #$conn->query($sql_unos);
+          ?>
+     
           <!--Footer-->  
       <div class="container-fluid">
         <div class="row-fluid">
