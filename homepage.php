@@ -29,7 +29,7 @@
        <div class="col col-lg-2 p-4 text-center banner ">
        <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="media/person-fill.svg" alt="userpic" height="30" title="userpic">
+            <img src="media/profile_white.png" alt="userpic" height="30" title="userpic">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <h6 class="dropdown-header text-center">
@@ -43,6 +43,7 @@
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
@@ -55,7 +56,9 @@
         <!--if pic property of user table is empty show stock image-->
           <div class="text-center pt-3" style="width:100%">
               <div class="navbar-brand"><a href="homepage.php">Home</a></div><br>
-              <div class="navbar-brand"><a href="user_profile_page.php">My profile</a></div>
+              <!-- ovdje treba dodati da link "my profile" vodi na skriptu koja ce ovisno o user_id-u 
+              voditi ili na user_profile_page.php ili na host_profile_page.php -->
+              <div class="navbar-brand"><a href="profile_redirect.php">My profile</a></div>
           </div>
         </div>
         <!--if has no past reservations show "You have no reservations, make your first!-->

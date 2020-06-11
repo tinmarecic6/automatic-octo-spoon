@@ -34,7 +34,7 @@
        <div class="col col-lg-2 p-4 text-center banner ">
        <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="media/person-fill.svg" alt="userpic" height="30" title="userpic">
+            <img src="media/profile_white.png" alt="userpic" height="30" title="userpic">
           </button>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
           <h6 class="dropdown-header text-center">
@@ -45,7 +45,7 @@
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
-            <a class="dropdown-item" href="newobject.php">New object</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>  
@@ -156,12 +156,39 @@
               </div>
               <hr>
               <div class="row m-4 justify-content-md-center">
-              <a class="btn btn-secondary text-light" href="become_host.php" >Become a host</a>
+              <a class="btn btn-secondary text-light" href="newobject.php">Host a new home!</a>
               </div>
           </div>
         </div>
-        <!--if has no past reservations show "You have no reservations, make your first!-->
-         <div class="col col-md-7 text-center reservations_p shadow"><h3 class="mt-4">Your past reservations</h3>
+
+         <div class="col col-md-7 text-center reservations_p shadow">
+         <!--if has no past reservations show "You have no objects, host your first!-->
+         <h3 class="mt-4 mb-4">Your objects</h3>
+         <?php
+          $sql_objects = 'SELECT * FROM `object` where object.User_ID = '.$_SESSION['User_ID'].';';
+          $result_objects = $conn->query($sql_objects);
+          if($result_objects->num_rows>0){
+            foreach ($result_objects as $ro){
+              echo '<div class="col col-sm-3 m-2">
+              <div class="card kartice">
+              <div class="card-body">
+              <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Object no. '.$ro['Object_ID'].'</h5>
+              <h6 class="card-subtitle mt-4">
+                Object name: '.$ro['Object_name'].' <br>
+                Price: '.$ro['Price'].'<br>
+                Location: '.$ro['Location_ID'].'
+              </h6>
+              <hr>
+              <a href="#" class="card-link">View info</a>
+              <a href="#" class="card-link">Delete</a>
+              </div>
+              </div>
+              </div>'; 
+            }
+          }
+          ?>
+          <!--if has no past reservations show "You have no reservations, make your first!-->
+         <h3 class="mt-4">Your past reservations</h3>
           <!--reservation info goes here-->
           <div class="text-left">
           <div class="container-fluid">

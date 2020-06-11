@@ -20,6 +20,18 @@
     background-color: #505458;
 }
 
+a.card-link{
+    color: white;
+}
+
+a.card-link:visited{
+    color: white;
+}
+
+a.card-link:hover{
+    color: #998e88;
+}
+
 body{
     background: rgb(52,58,64);
     background: radial-gradient(circle, rgba(52,58,64,1) 0%, rgba(28,30,32,1) 100%);
@@ -32,6 +44,28 @@ body{
     left:0;
 }
 
+a.dropdown-item:link{
+    color: black;
+}
+a.dropdown-item:visited{
+    color: black;
+}
+a.dropdown-item:hover{
+    color: #998e88;
+}
+
+
+a{
+    text-decoration: none;
+}
+a:link, a:visited{
+    color: white;
+}
+a:hover{
+    color: #998e88;
+    text-decoration: none;
+}
+
 .navigacija
 {
     height: 1%;
@@ -39,29 +73,24 @@ body{
     top: 0;
     padding-bottom: 1%;
 }
-
 .navigacija a
 {
     text-decoration: none;
 }
-
 .navigacija a:link
 {
     color:white;
 }
-
 .navigacija a:visited
 {
     color:white;
 }
-
 .navigacija a:hover
 {
-    color:black;
+    color:#998e88;
 }
-
 .navigacija a:active
 {
-    color:black;
+    color:#998e88;
     font-weight: bolder;
 }
