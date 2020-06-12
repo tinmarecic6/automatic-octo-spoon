@@ -111,6 +111,7 @@
             echo '<thead><tr>
             <th>Object ID</th>
             <th>Object name</th>
+            <th>Object description</th>
             <th>Price</th>
             <th>Location ID</th>
             <th>User ID</th>
