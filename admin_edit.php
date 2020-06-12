@@ -40,25 +40,39 @@
     }
     if(isset($_POST['username']) && $_POST['username']!= ''){
         $sql_update_username = 'UPDATE `user` SET `Username`="'.$_POST['username'].'" WHERE `User_ID` = '.$userid.';';
-        $conn->query($sql_update_username);
-        #header("Location: admin_profile_page.php");
+        $conn->query($sql_update_username);;
     };
     if(isset($_POST['firstname']) && $_POST['firstname']!= ''){
         $sql_update_first_name = 'UPDATE `user` SET `First_name`="'.$_POST['firstname'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_first_name);
-        #header("Location: admin_profile_page.php");
 
     };
     if(isset($_POST['lastname']) && $_POST['lastname']!= ''){
         $sql_update_last_name = 'UPDATE `user` SET `Last_name`="'.$_POST['lastname'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_last_name);
-        #header("Location: admin_profile_page.php");
     };
-    if(isset($_POST['user_image']) && $_POST['user_image']!= ''){
-        $sql_update_user_image = 'UPDATE `user` SET `User_image`="'.$_POST['user_image'].'" WHERE `User_ID` = '.$userid.';';
-        #not finisher, requires file transfer
-        #$conn->query($sql_update_user_image);
-        #header("Location: admin_profile_page.php");
+    if(isset($_FILES['userimage'])){
+        if(isset($_FILES['userimage']) && $_FILES['userimage']['error']!=4){
+            if(isset($_FILES['userimage']['tmp_name'])){
+              $target_dir = "media/pictures/";
+              $ext = pathinfo($_FILES['userimage']['name']);
+              $target_file = $target_dir . rand() .'.'.$ext['extension'];
+              $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$userid.';';
+              echo $sql_update_profile_pic;
+              if (move_uploaded_file($_FILES['userimage']['tmp_name'], $target_file)==1) {
+                $conn->query($sql_update_profile_pic);
+                $_FILES = array();
+                header("Location:admin_profile_page.php");
+              }
+              else {
+                echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
+                There was an error uploading your picture!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button></div>';
+              }
+            } 
+          }
     };
     if(isset($_POST['typeid']) && $_POST['typeid']!= ''){
         $sql_update_type_id = 'UPDATE `user` SET `Type_id`="'.$_POST['typeid'].'" WHERE `User_ID` = '.$userid.';';
@@ -121,9 +135,12 @@
             $sql_user = 'SELECT * from `user` where User_ID ="'.$_GET['userid'].'";';
             $result_user = $conn->query($sql_user);
             $user =$result_user->fetch_assoc();
-            
+            $sql_user_type='SELECT * FROM `user_type`;';
+            $result_type=$conn->query($sql_user_type);
+            #$type=$result_type->fetch_assoc();
+
         ?>
-         <form class="container mt-5 pt-4" name="edituser" method="POST" action="?userid=<?php echo $userid; ?>">
+         <form class="container mt-5 pt-4" enctype="multipart/form-data" name="edituser" method="POST" action="?userid=<?php echo $userid; ?>">
                 <h3 class="mb-5">Change user info:</h3>
                 <div class="row">
                     <div class="col form-group">
@@ -144,13 +161,19 @@
                     <div class="col">
                             <label for="typeid">Type ID:</label>
                             <select class="col form-control" id="typeid" name="typeid" placeholder="Type ID">';
+                            <!-- <option value="1">Admin</option> -->
+                            <?php 
+                            foreach($result_type as $t){
+                                echo '<option value="'.$t['Type_ID'].'">'.$t['User_type'].'</option>';
+                            }
+                            ?>
                             </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col form-group">
                         <label for="userimage">User image:</label>
-                        <input type="file" class="form-control-file" id="userimage">
+                        <input type="file" class="form-control-file" name="userimage" id="userimage">
                     </div>
                     <div class="col">
                         <div class="row form-group">              
