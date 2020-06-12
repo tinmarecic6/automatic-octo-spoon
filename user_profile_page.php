@@ -165,7 +165,7 @@
           <div class="container-fluid">
             <div class="row justify-content-center mt-5">
           <?php
-          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].';';
+          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].' ;';
           $result_vacay = $conn->query($sql_vacay);
           if($result_vacay->num_rows>0){
             foreach ($result_vacay as $rv){
