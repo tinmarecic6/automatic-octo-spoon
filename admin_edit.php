@@ -38,6 +38,8 @@
     if(isset($_GET['resid']) && $_GET['resid']!='' ){
         $resid = $_GET['resid'];
     }
+
+/* USERI */
     if(isset($_POST['username']) && $_POST['username']!= ''){
         $sql_update_username = 'UPDATE `user` SET `Username`="'.$_POST['username'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_username);;
@@ -90,30 +92,29 @@
     };
 
 /* OBJEKTI */
-    if(isset($_GET['objid']) && $_GET['objid']!='' ){
-        $objid = $_GET['objid'];   
-    }
-    
-    if(isset($_POST['object_name']) && $_POST['object_name']!= ''){
-        $sql_update_object_name = 'UPDATE `object` SET `Object_name`="'.$_POST['object_name'].'" WHERE `Object_ID` = '.$objid.';';
-        $conn->query($sql_update_object_name);
+
+    if(isset($_POST['objectname']) && $_POST['objectname']!= ''){
+        $sql_update_objectname = 'UPDATE `object` SET `Object_name`="'.$_POST['objectname'].'" WHERE `Object_ID` = '.$objid.';';
+        $conn->query($sql_update_objectname);
     };
     if(isset($_POST['price']) && $_POST['price']!= ''){
         $sql_update_price = 'UPDATE `object` SET `Price`="'.$_POST['price'].'" WHERE `Object_ID` = '.$objid.';';
         $conn->query($sql_update_price);
-};
+    };
+    if(isset($_POST['objectdesc']) && $_POST['objectdesc']!= ''){
+        $sql_update_objectdesc = 'UPDATE `object` SET `Object_desc`="'.$_POST['objectdesc'].'" WHERE `Object_ID` = '.$objid.';';
+        $conn->query($sql_update_objectdesc);
+    };
 
 /* REZERVACIJE */
-    if(isset($_GET['resid']) && $_GET['resid']!='' ){
-    $resid = $_GET['resid'];
-    }
-    if(isset($_POST['date_from']) && $_POST['date_from']!= ''){
-        $sql_update_date_from = 'UPDATE `reservation` SET `Date_from`="'.$_POST['date_from'].'" WHERE `Reservation_ID` = '.$resid.';';
-        $conn->query($sql_update_date_from);
+
+    if(isset($_POST['datefrom']) && $_POST['datefrom']!= ''){
+        $sql_update_datefrom = 'UPDATE `reservation` SET `Date_from`="'.$_POST['datefrom'].'" WHERE `Reservation_ID` = '.$resid.';';
+        $conn->query($sql_update_datefrom);
     };
-    if(isset($_POST['date_to']) && $_POST['date_to']!= ''){
-        $sql_update_date_to = 'UPDATE `reservation` SET `Date_to`="'.$_POST['date_to'].'" WHERE `Reservation_ID` = '.$resid.';';
-        $conn->query($sql_update_date_to);
+    if(isset($_POST['dateto']) && $_POST['dateto']!= ''){
+        $sql_update_dateto = 'UPDATE `reservation` SET `Date_to`="'.$_POST['dateto'].'" WHERE `Reservation_ID` = '.$resid.';';
+        $conn->query($sql_update_dateto);
     };
     if(isset($_POST['status']) && $_POST['status']!= ''){
         $sql_update_status = 'UPDATE `reservation` SET `Status`="'.$_POST['status'].'" WHERE `Reservation_ID` = '.$resid.';';
@@ -211,6 +212,11 @@
                     </div>
                     <div class="col form-group">
                         <input type="number" class="form-control" id="price" name="price" placeholder="<?php echo $object['Price']; ?>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="objectdesc" placeholder="<?php echo $object['Object_desc']; ?>">
                     </div>
                 </div>
                 <div class="row justify-content-center mt-5">
