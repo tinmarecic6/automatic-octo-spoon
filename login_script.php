@@ -4,7 +4,7 @@ $conn = db();
 
 /*Login backend*/
 $username = $_POST['username'];
-$pass = $_POST['pass'];
+$pass = md5($_POST['pass']);
 $sql_user = 'SELECT * from `user` where Username="'.$username.'" and Password="'.$pass.'";';
 $result = $conn->query($sql_user);
 session_start();
@@ -26,7 +26,7 @@ if($result && $result->num_rows==1){
     }
 }
 else{
-    //header("Location: index.php"); 
+    header("Location: index.php"); 
 }
 
 ?>
