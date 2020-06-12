@@ -184,7 +184,7 @@
         }
         else{
           echo '<div class="mt-4 text-light">You have no reservations, reserve now!';
-          echo '<div class="row"><a href="new_res.php" class="col m-3 btn btn-warning"><h4>Reserve here</h4></a></div>';
+          echo '<div class="row"><a href="newreservation.php" class="col m-3 btn btn-warning"><h4>Reserve here</h4></a></div>';
         }
           ?>
             </div>
