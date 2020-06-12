@@ -50,15 +50,21 @@
       </div>
      </div>
 
-     <form class="container mt-3 pt-4" name="newobj" method="POST" action="newobject_script.php">
+     <form class="container mt-3 pt-4" name="newres" method="POST" action="newreservation_script.php">
                 <h3 class="mb-5">Object info:</h3>
                 
                 <div class="row">
-                    <div class="col form-group">
-                        <input type="text" class="form-control" id="objectname" name="objectname" placeholder="Object name">
+                    <div class="col-2 form-group">
+                        <label for="datefrom">Date from:</label>
                     </div>
                     <div class="col form-group">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="Price">
+                        <input type="date" class="form-control" name="datefrom">
+                    </div>
+                    <div class="col-2 form-group">
+                        <label for="dateto">Date to:</label>
+                    </div>
+                    <div class="col form-group">
+                        <input type="date" class="form-control" name="dateto">
                     </div>
                 </div>
                 <div class="row">

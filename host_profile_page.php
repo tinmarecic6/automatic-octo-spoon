@@ -162,31 +162,52 @@
         </div>
 
          <div class="col col-md-7 text-center reservations_p shadow">
+        
+      <?php
+      if(isset($_SESSION['inserted']) && $_SESSION['inserted'] == 1):
+      ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success! </strong>New object has been hosted.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      <?php
+      $_SESSION['inserted'] = 0;
+      endif;
+      ?>
+
          <!--if has no past reservations show "You have no objects, host your first!-->
          <h3 class="mt-4 mb-4">Your objects</h3>
+         <div class="row">
          <?php
           $sql_objects = 'SELECT * FROM `object` where object.User_ID = '.$_SESSION['User_ID'].';';
           $result_objects = $conn->query($sql_objects);
           if($result_objects->num_rows>0){
             foreach ($result_objects as $ro){
-              echo '<div class="col col-sm-3 m-2">
-              <div class="card kartice">
-              <div class="card-body">
-              <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Object no. '.$ro['Object_ID'].'</h5>
-              <h6 class="card-subtitle mt-4">
-                Object name: '.$ro['Object_name'].' <br>
-                Price: '.$ro['Price'].'<br>
-                Location: '.$ro['Location_ID'].'
-              </h6>
-              <hr>
-              <a href="#" class="card-link">View info</a>
-              <a href="#" class="card-link">Delete</a>
-              </div>
-              </div>
-              </div>'; 
+              echo '
+                <div class="col col-sm-3 m-2">
+                <div class="card kartice">
+                <div class="card-body" style="height: 15rem;">
+                <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Object no. '.$ro['Object_ID'].'</h5>
+                <h6 class="card-subtitle mt-4" style="height: 6rem;">
+                  Object name: '.$ro['Object_name'].' <br>
+                  Price: '.$ro['Price'].'<br>
+                  Location: '.$ro['Location_ID'].'
+                </h6>
+                <hr style="border-bottom: 1px dashed white;">
+                  <div class="row">
+                    <a href="#" class="col card-link mt-auto">View info</a>
+                    <a href="#" class="col card-link mt-auto">Delete</a>
+                  </div>
+                </div>
+                </div>
+                </div>
+            '; 
             }
           }
           ?>
+          </div>
           <!--if has no past reservations show "You have no reservations, make your first!-->
          <h3 class="mt-4">Your past reservations</h3>
           <!--reservation info goes here-->
