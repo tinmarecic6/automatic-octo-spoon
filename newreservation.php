@@ -52,7 +52,6 @@
 
      <form class="container mt-3 pt-4" name="newres" method="POST" action="newreservation_script.php">
                 <h3 class="mb-5">Choose your reservation dates:</h3>
-                
                 <div class="row justify-content-center">
                     <div class="col-2 form-group align-self-center">
                         <label for="datefrom">Date from:</label>
@@ -71,7 +70,9 @@
                 </div>
                 <div class="row justify-content-center mt-5">
                     <input type="submit" class="col-2 btn btn-secondary text-light" value="Reserve">
+                    <input type="hidden" value="<?php echo $_GET['objid']; ?>" name="Object_ID">
                 </div>
+
                 <div class="row justify-content-center mt-3">
                     <a class="col-2 btn btn-secondary" href="homepage.php">Homepage</a>
                 </div>
