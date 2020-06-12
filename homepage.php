@@ -56,20 +56,61 @@
         <!--if pic property of user table is empty show stock image-->
           <div class="text-center pt-3" style="width:100%">
               <div class="navbar-brand"><a href="homepage.php">Home</a></div><br>
-              <!-- ovdje treba dodati da link "my profile" vodi na skriptu koja ce ovisno o user_id-u 
-              voditi ili na user_profile_page.php ili na host_profile_page.php -->
               <div class="navbar-brand"><a href="profile_redirect.php">My profile</a></div>
           </div>
         </div>
-        <!--if has no past reservations show "You have no reservations, make your first!-->
          <div class="col col-md-7 text-center reservations_p shadow pt-5"><h3>Your next vacation</h3>
           <!--reservation info goes here-->
           <div class="text-left">
           <div class="container-fluid">
             <div class="row justify-content-center mt-5">
-          <?php
-
-          $sql_objekti = 'SELECT * FROM `object`';
+          <?php #izdenifirat polje za naslovnu sliku objekta?
+          $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE object.User_ID = user.User_ID';
+          $res_obj_usr = $conn->query($sql_objekti_user);
+          $sql_slike = 'SELECT * FROm `object_images` where `object_images`.Object_ID = `object`.Object_ID;';
+          if($res_obj_usr->num_rows>=1){
+            foreach($res_obj_usr as $ro){
+              echo 'No. of available places for you:<b> <p class="ml-3"> '.$res_obj_usr->num_rows.'</p></b>';
+              echo '
+              <div class="col col-sm-12 m-3">
+                <div class="card kartice">
+                  <div class="card-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-2">';
+                        echo'<img src="https://static.ferienhausmiete.de/pictures/125531/bilder_original/125531_22829505223751.jpg" alt="slika" width="100%"></img>';
+                          echo '
+                        </div>
+                        <div class="col-7">
+                          <div class="row">
+                            Host: '.$ro['First_name'].' '.$ro['Last_name'].'
+                          </div>
+                          <br>
+                          <div class="row">
+                            Description:<br>
+                            '.$ro['Object_desc'].'
+                          </div>
+                        </div>
+                        <div class="col text-right">
+                          Price for one night: 
+                          '.$ro['Price'].'€
+                        </div>
+                      </div>
+                      <div class="row">
+                            <div class="col-6">
+                              <!--empty div-->
+                            </div>
+                            <div class="col-6">
+                              <a href="newreservation.php?objid='.$ro['Object_ID'].'&userid='.$_SESSION['User_ID'].'" class="btn btn-light text-dark">Reserve now</a>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>';
+            }
+          };
+          /* $sql_objekti = 'SELECT * FROM `object`';
           $res_obj = $conn->query($sql_objekti);
           $sql_useri = 'SELECT * FROM `user`';
           $res_user = $conn->query($sql_useri);
@@ -106,42 +147,7 @@
                 </div>
               </div>
             ';
-          }
-
-
-
-          /*
-            for($i = 0;$i<15;$i++){
-              echo'
-                  <div class="col col-sm-12 m-3">
-                    <div class="card kartice">
-                      <div class="card-body">
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-2">
-                              <img src="media/sg.jpeg" alt="slika" width="100%"></img>
-                            </div>
-                            <div class="col-7">
-                              <div class="row">
-                                Host: Pero Perić
-                              </div>
-                              <br>
-                              <div class="row">
-                                Description:<br>
-                                Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
-                              </div>
-                            </div>
-                            <div class="col text-right">
-                              Price for one night: <br>
-                              1.000,00 HRK
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              ';}
-          */
+          } */
           ?>
           
             </div>
