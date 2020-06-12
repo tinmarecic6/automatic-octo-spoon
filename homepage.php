@@ -69,36 +69,79 @@
             <div class="row justify-content-center mt-5">
           <?php
 
-          for($i = 0;$i<15;$i++){
-            echo'
-                <div class="col col-sm-12 m-3">
-                  <div class="card kartice">
-                    <div class="card-body">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-2">
-                            <img src="media/sg.jpeg" alt="slika" width="100%"></img>
+          $sql_objekti = 'SELECT * FROM `object`';
+          $res_obj = $conn->query($sql_objekti);
+          $sql_useri = 'SELECT * FROM `user`';
+          $res_user = $conn->query($sql_useri);
+
+          while($row_obj = $res_obj->fetch_assoc())
+          {
+            echo
+            '
+              <div class="col col-sm-12 m-3">
+                <div class="card kartice">
+                  <div class="card-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-2">
+                          <img src="media/ubaci.jpeg" alt="slika" width="100%"></img>
+                        </div>
+                        <div class="col-7">
+                          <div class="row">
+                            Host: '.$row_obj['First_name'].' '.row_obj['Last_name'].'
                           </div>
-                          <div class="col-7">
-                            <div class="row">
-                              Host: Pero Perić
-                            </div>
-                            <br>
-                            <div class="row">
-                              Description:<br>
-                              Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
-                            </div>
+                          <br>
+                          <div class="row">
+                            Description:<br>
+                            Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
                           </div>
-                          <div class="col text-right">
-                            Price for one night: <br>
-                            1.000,00 HRK
-                          </div>
+                        </div>
+                        <div class="col text-right">
+                          Price for one night: <br>
+                          1.000,00 HRK
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
               </div>
+            ';
+          }
+
+
+
+          /*
+            for($i = 0;$i<15;$i++){
+              echo'
+                  <div class="col col-sm-12 m-3">
+                    <div class="card kartice">
+                      <div class="card-body">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-2">
+                              <img src="media/sg.jpeg" alt="slika" width="100%"></img>
+                            </div>
+                            <div class="col-7">
+                              <div class="row">
+                                Host: Pero Perić
+                              </div>
+                              <br>
+                              <div class="row">
+                                Description:<br>
+                                Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
+                              </div>
+                            </div>
+                            <div class="col text-right">
+                              Price for one night: <br>
+                              1.000,00 HRK
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
               ';}
+          */
           ?>
           
             </div>
