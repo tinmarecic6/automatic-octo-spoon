@@ -51,48 +51,36 @@
      </div>
 
      <form class="container mt-3 pt-4" name="newres" method="POST" action="newreservation_script.php">
-                <h3 class="mb-5">Object info:</h3>
+                <h3 class="mb-5">Choose your reservation dates:</h3>
                 
-                <div class="row">
-                    <div class="col-2 form-group">
+                <div class="row justify-content-center">
+                    <div class="col-2 form-group align-self-center">
                         <label for="datefrom">Date from:</label>
                     </div>
-                    <div class="col form-group">
+                    <div class="col-3 form-group">
                         <input type="date" class="form-control" name="datefrom">
                     </div>
-                    <div class="col-2 form-group">
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-2 form-group align-self-center">
                         <label for="dateto">Date to:</label>
                     </div>
-                    <div class="col form-group">
+                    <div class="col-3 form-group">
                         <input type="date" class="form-control" name="dateto">
                     </div>
                 </div>
-                <div class="row">
-                  <div class="col-1 align-self-center">
-                    Location:
-                  </div>
-                  <div class="col">
-                      <select class="form-control" id="locationid" name="locationid">';
-                      </select>
-                  </div>
-                </div>
                 <div class="row justify-content-center mt-5">
-                    <input type="submit" class="col-2 btn btn-secondary text-light" value="Host">
+                    <input type="submit" class="col-2 btn btn-secondary text-light" value="Reserve">
                 </div>
                 <div class="row justify-content-center mt-3">
-                    <a class="col-2 btn btn-secondary" href="host_profile_page.php">My profile</a>
+                    <a class="col-2 btn btn-secondary" href="homepage.php">Homepage</a>
                 </div>
             </form>
-
-          <?php
-            #$sql_unos = 'INSERT INTO `object` (`Object_ID`, `Object_name`, `Price`, `Location_ID`, `User_ID`) VALUES (NULL, 'objectname', 'price', 'locationid', '$_SESSION['User_ID']')';
-            #$conn->query($sql_unos);
-          ?>
      
           <!--Footer-->  
       <div class="container-fluid">
         <div class="row-fluid">
-            <div class="col-sm-12 p-4 text-center  footer">
+            <div class="col-sm-12 p-4 text-center footer">
               Courtesy of TIN_MAR&co &copy
             </div>
         </div>

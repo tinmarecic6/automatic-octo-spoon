@@ -173,7 +173,7 @@
             </button>
         </div>
       <?php
-      $_SESSION['inserted'] = 0;
+      $_SESSION['insertedobj'] = 0;
       endif;
       ?>
 

@@ -49,6 +49,11 @@
         </div> 
       </div>
      </div>
+    
+    <?php
+      $sql_loc_id='SELECT * FROM `location`;';
+      $result_loc=$conn->query($sql_loc_id);
+    ?>
 
      <form class="container mt-3 pt-4" name="newobj" method="POST" action="newobject_script.php">
                 <h3 class="mb-5">Object info:</h3>
@@ -62,11 +67,21 @@
                     </div>
                 </div>
                 <div class="row">
+                  <div class="col form-group">
+                    <input type="text" class="form-control" name="objectdesc" placeholder="Object description">
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-1 align-self-center">
                     Location:
                   </div>
                   <div class="col">
                       <select class="form-control" id="locationid" name="locationid">';
+                          <?php 
+                            foreach($result_loc as $l){
+                                echo '<option value="'.$l['Location_ID'].'">'.$l['City'].'</option>';
+                            }
+                          ?>
                       </select>
                   </div>
                 </div>
@@ -77,11 +92,6 @@
                     <a class="col-2 btn btn-secondary" href="host_profile_page.php">My profile</a>
                 </div>
             </form>
-
-          <?php
-            #$sql_unos = 'INSERT INTO `object` (`Object_ID`, `Object_name`, `Price`, `Location_ID`, `User_ID`) VALUES (NULL, 'objectname', 'price', 'locationid', '$_SESSION['User_ID']')';
-            #$conn->query($sql_unos);
-          ?>
      
           <!--Footer-->  
       <div class="container-fluid">
