@@ -42,16 +42,19 @@
 /* USERI */
     if(isset($_POST['username']) && $_POST['username']!= ''){
         $sql_update_username = 'UPDATE `user` SET `Username`="'.$_POST['username'].'" WHERE `User_ID` = '.$userid.';';
-        $conn->query($sql_update_username);;
+        $conn->query($sql_update_username);
+        $insertedadmin = 1;
     };
     if(isset($_POST['firstname']) && $_POST['firstname']!= ''){
         $sql_update_first_name = 'UPDATE `user` SET `First_name`="'.$_POST['firstname'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_first_name);
+        $insertedadmin = 1;
 
     };
     if(isset($_POST['lastname']) && $_POST['lastname']!= ''){
         $sql_update_last_name = 'UPDATE `user` SET `Last_name`="'.$_POST['lastname'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_last_name);
+        $insertedadmin = 1;
     };
     if(isset($_FILES['userimage'])){
         if(isset($_FILES['userimage']) && $_FILES['userimage']['error']!=4){
@@ -64,7 +67,7 @@
               if (move_uploaded_file($_FILES['userimage']['tmp_name'], $target_file)==1) {
                 $conn->query($sql_update_profile_pic);
                 $_FILES = array();
-                header("Location:admin_profile_page.php");
+                $insertedadmin = 1;
               }
               else {
                 echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
@@ -79,16 +82,22 @@
     if(isset($_POST['typeid']) && $_POST['typeid']!= ''){
         $sql_update_type_id = 'UPDATE `user` SET `Type_id`="'.$_POST['typeid'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_type_id);
-        #header("Location: admin_profile_page.php");
+        $insertedadmin = 1;
     };
     if(isset($_POST['dob']) && $_POST['dob']!= ''){
         $sql_update_dob = 'UPDATE `user` SET `Date_of_birth`="'.$_POST['dob'].'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_dob);
-        #header("Location: admin_profile_page.php");
+        $insertedadmin = 1;
     };
     if(isset($_POST['password']) && $_POST['password']!= ''){
-        $sql_update_password = 'UPDATE `user` SET `Password`="'.$_POST['password'].'" WHERE `User_ID` = '.$userid.';';
+        $sql_update_password = 'UPDATE `user` SET `Password`="'.md5($_POST['password']).'" WHERE `User_ID` = '.$userid.';';
         $conn->query($sql_update_password);
+        $insertedadmin = 1;
+    };
+    if(isset($insertedadmin) && $insertedadmin == 1)
+    {
+        $_SESSION['insertedadmin'] = 0;
+        header("Location: admin_profile_page.php");
     };
 
 /* OBJEKTI */
@@ -96,14 +105,22 @@
     if(isset($_POST['objectname']) && $_POST['objectname']!= ''){
         $sql_update_objectname = 'UPDATE `object` SET `Object_name`="'.$_POST['objectname'].'" WHERE `Object_ID` = '.$objid.';';
         $conn->query($sql_update_objectname);
+        $insertedadmin = 1;
     };
     if(isset($_POST['price']) && $_POST['price']!= ''){
         $sql_update_price = 'UPDATE `object` SET `Price`="'.$_POST['price'].'" WHERE `Object_ID` = '.$objid.';';
         $conn->query($sql_update_price);
+        $insertedadmin = 1;
     };
     if(isset($_POST['objectdesc']) && $_POST['objectdesc']!= ''){
         $sql_update_objectdesc = 'UPDATE `object` SET `Object_desc`="'.$_POST['objectdesc'].'" WHERE `Object_ID` = '.$objid.';';
         $conn->query($sql_update_objectdesc);
+        $insertedadmin = 1;
+    };
+    if(isset($insertedadmin) && $insertedadmin == 1)
+    {
+        $_SESSION['insertedadmin'] = 0;
+        header("Location: admin_profile_page.php");
     };
 
 /* REZERVACIJE */
@@ -111,18 +128,27 @@
     if(isset($_POST['datefrom']) && $_POST['datefrom']!= ''){
         $sql_update_datefrom = 'UPDATE `reservation` SET `Date_from`="'.$_POST['datefrom'].'" WHERE `Reservation_ID` = '.$resid.';';
         $conn->query($sql_update_datefrom);
+        $insertedadmin = 1;
     };
     if(isset($_POST['dateto']) && $_POST['dateto']!= ''){
         $sql_update_dateto = 'UPDATE `reservation` SET `Date_to`="'.$_POST['dateto'].'" WHERE `Reservation_ID` = '.$resid.';';
         $conn->query($sql_update_dateto);
+        $insertedadmin = 1;
     };
     if(isset($_POST['status']) && $_POST['status']!= ''){
         $sql_update_status = 'UPDATE `reservation` SET `Status`="'.$_POST['status'].'" WHERE `Reservation_ID` = '.$resid.';';
         $conn->query($sql_update_status);
+        $insertedadmin = 1;
     };
     if(isset($_POST['confirmed']) && $_POST['confirmed']!= ''){
         $sql_update_confirmed = 'UPDATE `reservation` SET `Confirmed`="'.$_POST['confirmed'].'" WHERE `Reservation_ID` = '.$resid.';';
         $conn->query($sql_update_confirmed);
+        $insertedadmin = 1;
+    };
+    if(isset($insertedadmin) && $insertedadmin == 1)
+    {
+        $_SESSION['insertedadmin'] = 1;
+        header("Location: admin_profile_page.php");
     };
 
 ?>
@@ -240,11 +266,11 @@
                     <input type="date" class="form-control" name="dateto" id="dateto">
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="status" id="status">
+                    <input type="checkbox" class="form-check-input" name="status" value="1">
                     <label class="form-check-label" for="status">Status</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="confirmed" id="confirmed">
+                    <input type="checkbox" class="form-check-input" name="confirmed" value="1">
                     <label class="form-check-label" for="confirmed">Confirmed</label>
                 </div>
                 <div class="row justify-content-center mt-5">

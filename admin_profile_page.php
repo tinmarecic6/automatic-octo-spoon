@@ -67,7 +67,22 @@
           <!--reservation info goes here-->
           <div class="text-left">
           <div class="container-fluid">
+            <?php
+            if(isset($_SESSION['insertedadmin']) && $_SESSION['insertedadmin'] == 1):
+            ?>
+              <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>Your changes have been saved.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+            <?php
+            $_SESSION['insertedadmin'] = 0;
+            endif;
+            ?>
             <div class="row justify-content-left mt-5">
+
+
           <?php
           $sql_all_user = 'SELECT * from user';
           $result_all_user = $conn->query($sql_all_user);
