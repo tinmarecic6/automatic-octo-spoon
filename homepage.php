@@ -67,10 +67,10 @@
           <?php #izdenifirat polje za naslovnu sliku objekta?
           $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE object.User_ID = user.User_ID';
           $res_obj_usr = $conn->query($sql_objekti_user);
-          $sql_slike = 'SELECT * FROm `object_images` where `object_images`.Object_ID = `object`.Object_ID;';
+          $sql_slike = 'SELECT * FROM `object_images` WHERE `object_images`.Object_ID = `object`.Object_ID;';
           if($res_obj_usr->num_rows>=1){
+            echo 'No. of available places for you:<b> <p class="ml-3"> '.$res_obj_usr->num_rows.'</p></b>';
             foreach($res_obj_usr as $ro){
-              echo 'No. of available places for you:<b> <p class="ml-3"> '.$res_obj_usr->num_rows.'</p></b>';
               echo '
               <div class="col col-sm-12 m-3">
                 <div class="card kartice">
