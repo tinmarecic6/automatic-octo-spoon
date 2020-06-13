@@ -24,6 +24,8 @@
          session_start();
          require_once('scripts/db.php');
          $conn = db();
+
+        # echo date("d-m-Y");
          ?>
         </div>
        <div class="col col-lg-2 p-4 text-center banner ">
@@ -57,7 +59,9 @@
                         <label for="datefrom">Date from:</label>
                     </div>
                     <div class="col-3 form-group">
-                        <input type="date" class="form-control" name="datefrom">
+                        <input type="date" min="<?php $pocetni = new DateTime('tomorrow');
+                                       echo $pocetni->format('Y-m-d');   
+                                       ?>" class="form-control" name="datefrom" id="datefrom">
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -65,7 +69,10 @@
                         <label for="dateto">Date to:</label>
                     </div>
                     <div class="col-3 form-group">
-                        <input type="date" class="form-control" name="dateto">
+                        <input type="date" min="<?php $zavrsni = new DateTime($pocetni->format('Y-m-d'));
+                                          $zavrsni->add(new DateInterval('P1D'));
+                                          echo $zavrsni->format('Y-m-d');?>"
+                                          class="form-control" name="dateto" id="dateto">
                     </div>
                 </div>
                 <div class="row justify-content-center mt-5">
@@ -77,7 +84,7 @@
                     <a class="col-2 btn btn-secondary" href="homepage.php">Homepage</a>
                 </div>
             </form>
-     
+           
           <!--Footer-->  
       <div class="container-fluid">
         <div class="row-fluid">
