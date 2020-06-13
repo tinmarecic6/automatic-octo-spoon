@@ -12,7 +12,7 @@
     
     #insertion sql
     $sql_unos = 'INSERT INTO `object`
-                (`Object_ID`, `Object_name`, `Price`, `Location_ID`, `User_ID`) 
+                (`Object_ID`, `Object_name`, `Price`, `Object_desc`, `Location_ID`, `User_ID`) 
                 VALUES (NULL, "'.$objectname.'", '.$price.', "'.$objectdesc.'", '.$locationid.', '.$_SESSION['User_ID'].');';
     echo $sql_unos;
 
