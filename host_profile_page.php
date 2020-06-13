@@ -127,7 +127,7 @@
               <!--Modal-->
               <div class="modal fade" id="infoedit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                  <div class="modal-content kartice">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">
                       <?php
@@ -164,7 +164,7 @@
          <div class="col col-md-7 text-center reservations_p shadow">
         
       <?php
-      if(isset($_SESSION['inserted']) && $_SESSION['inserted'] == 1):
+      if(isset($_SESSION['insertedobj']) && $_SESSION['insertedobj'] == 1):
       ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success! </strong>New object has been hosted.
@@ -213,17 +213,17 @@
           <!--reservation info goes here-->
           <div class="text-left">
           <div class="container-fluid">
-            <div class="row justify-content-center mt-5">
+            <div class="row justify-content-left mt-5">
           <?php
           $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].';';
           $result_vacay = $conn->query($sql_vacay);
           if($result_vacay->num_rows>0){
             foreach ($result_vacay as $rv){
-              echo '<div class="col col-sm-3 m-2">
-              <div class="card" >
+              echo '<div class="col col-sm-3 m-2 mb-4">
+              <div class="card kartice" >
                   <div class="card-body">
                     <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
-                    <h6 class="card-subtitle  text-muted">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
+                    <h6 class="card-subtitle mt-4">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
                     <hr>
                     <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
                     <a href="#" class="card-link">View info</a>
