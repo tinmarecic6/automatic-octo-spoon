@@ -77,7 +77,7 @@
                   <div class="card-body">
                     <div class="container">
                       <div class="row">
-                        <div class="col-2">';
+                        <div class="col-3 float-left">';
                         echo'<img src="https://static.ferienhausmiete.de/pictures/125531/bilder_original/125531_22829505223751.jpg" alt="slika" width="100%"></img>';
                           echo '
                         </div>
@@ -87,23 +87,30 @@
                           </div>
                           <br>
                           <div class="row">
+                            Object name: '.$ro['Object_name'].'
+                          </div>
+                          <br>
+                          <div class="row">
                             Description:<br>
                             '.$ro['Object_desc'].'
                           </div>
                         </div>
-                        <div class="col text-right">
-                          Price for one night: 
-                          '.$ro['Price'].'€
+                        <div class="col">
+                          <div class="row">
+                            Price per night:
+                          </div>
+                          <div class="row text-right">
+                            <strong>'.$ro['Price'].'€</strong>
+                          </div>
+                          <div class="row mt-3 justify-content-center">
+                            <a href="object_info.php?objid='.$ro['Object_ID'].'" class="btn btn-outline-light">More info</a>
+                          </div>
+                          <hr>
+                          <div class="row justify-content-center">
+                            <a href="newreservation.php?objid='.$ro['Object_ID'].'&userid='.$_SESSION['User_ID'].'" class="btn btn-light text-dark">Reserve now</a>
+                          </div>
                         </div>
                       </div>
-                      <div class="row">
-                            <div class="col-6">
-                              <!--empty div-->
-                            </div>
-                            <div class="col-6">
-                              <a href="newreservation.php?objid='.$ro['Object_ID'].'&userid='.$_SESSION['User_ID'].'" class="btn btn-light text-dark">Reserve now</a>
-                            </div>
-                        </div>
                     </div>
                   </div>
                 </div>
