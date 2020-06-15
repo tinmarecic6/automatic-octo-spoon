@@ -197,7 +197,7 @@
                 </h6>
                 <hr style="border-bottom: 1px dashed white;">
                   <div class="row">
-                    <a href="#" class="col card-link mt-auto">View info</a>
+                    <a href="object_info.php?objid='.$ro['Object_ID'].'" class="col card-link mt-auto">View info</a>
                     <a href="#" class="col card-link mt-auto">Delete</a>
                   </div>
                 </div>
@@ -215,14 +215,14 @@
           <div class="container-fluid">
             <div class="row justify-content-left mt-5">
           <?php
-          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].';';
+          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and reservation.Object_ID=object.Object_ID ;';
           $result_vacay = $conn->query($sql_vacay);
           if($result_vacay->num_rows>0){
             foreach ($result_vacay as $rv){
               echo '<div class="col col-sm-3 m-2 mb-4">
               <div class="card kartice" >
                   <div class="card-body">
-                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
+                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation ID --  '.$rv['Reservation_ID'].'</h5>
                     <h6 class="card-subtitle mt-4">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
                     <hr>
                     <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
