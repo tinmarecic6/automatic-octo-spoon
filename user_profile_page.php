@@ -134,7 +134,7 @@
                       </button>
                     </div>
                     <div class="modal-body text-center text-dark">
-                      <form enctype="multipart/form-data" name="edit_info" method="POST"  acton="?user=<?php echo $_SESSION['User_ID']; ?>">
+                      <form enctype="multipart/form-data" name="edit_info" method="POST"  action="?user=<?php echo $_SESSION['User_ID']; ?>">
                         First name: <input type="text" name="fname" class="m-2 text-dark" placeholder="<?php echo $row['First_name']; ?>"><br>
                         Last name:  <input type="text" name="lname" class="m-2 text-dark" placeholder="<?php echo $row['Last_name']; ?>"required><br>
                         Date of birth: <input type="date" name="dob" class="m-2 text-dark" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>

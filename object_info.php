@@ -101,6 +101,8 @@
      <div class="row justify-content-md-center">
        <div class="col col-md-2 text-center user_info ">
        <?php
+          $sql_slike = 'SELECT * FROM object_images where Object_ID = '.$_GET['objid'].';';
+          $result_slike = $conn->query($sql_slike);
           $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE object.User_ID = user.User_ID AND object.Object_ID = '.$_GET['objid'].';';
           $res_obj_usr = $conn->query($sql_objekti_user);
           foreach($res_obj_usr as $r)
@@ -122,12 +124,14 @@
             <div class="row m-4 justify-content-md-center">
               <form name="upload" action="upload_slika.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="files[]" multiple>
+                <input type="submit" class="mt-4 btn btn-secondary" value="Upload">
+                
+                <input type="hidden" value="<?php echo $_GET['objid']; ?>" name="object_id">
               </form>
             </div>
             <?php
               };
             ?>
-              <!--Modal trigger-->
               <?php
                 };
                 ?>
@@ -135,7 +139,17 @@
         </div>
 
          <div class="col col-md-7 text-center reservations_p shadow">
-            <img src="https://static.ferienhausmiete.de/pictures/125531/bilder_original/125531_22829505223751.jpg" alt="slika" width="100%">
+           
+         
+            
+         <?php if($result_slike->num_rows<1):?>
+            <h3>You have not uploaded any pictures yet, do it now!</h3>
+         <?php else:?>
+          <?php foreach($result_slike as $rs){
+          echo '<img src="media/object_images/'.$rs['Picture'].'" alt="'.$rs['Picture'].'">' ; 
+          }
+          ?>
+         <?php endif;?>
         </div>
       </div>     
           <!--Footer-->  
