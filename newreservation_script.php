@@ -5,7 +5,6 @@
     $conn = db();
 
     $reservation = $_POST['reservation'];
-    var_dump($reservation);
     $res = explode(' - ',$reservation);
     $datefrom = strtotime($res[0]);
     $date_from_conv = date('Y-m-d',$datefrom);
