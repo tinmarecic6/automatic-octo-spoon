@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/ico" href="media/favicon.ico"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,8 +35,6 @@
          session_start();
          require_once('scripts/db.php');
          $conn = db();
-
-        # echo date("d-m-Y");
          ?>
         </div>
        <div class="col col-lg-2 p-4 text-center banner ">

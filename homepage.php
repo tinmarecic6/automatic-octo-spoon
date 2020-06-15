@@ -63,13 +63,13 @@
           <!--reservation info goes here-->
           <div class="text-left">
           <div class="container-fluid">
-            <div class="row justify-content-center mt-5">
+            <div class="row justify-content-center mt-4">
           <?php #izdenifirat polje za naslovnu sliku objekta?
           $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE object.User_ID = user.User_ID';
           $res_obj_usr = $conn->query($sql_objekti_user);
           $sql_slike = 'SELECT * FROM `object_images` WHERE `object_images`.Object_ID = `object`.Object_ID;';
           if($res_obj_usr->num_rows>=1){
-            echo 'No. of available places for you:<b> <p class="ml-3"> '.$res_obj_usr->num_rows.'</p></b>';
+            echo 'No. of available places for you: &nbsp<b><p>'.$res_obj_usr->num_rows.'</p></b>';
             foreach($res_obj_usr as $ro){
               echo '
               <div class="col col-sm-12 m-3">
@@ -105,7 +105,7 @@
                           <div class="row mt-3 justify-content-center">
                             <a href="object_info.php?objid='.$ro['Object_ID'].'" class="btn btn-outline-light">More info</a>
                           </div>
-                          <hr>
+                          <hr style="border-bottom: 1px dashed white;">
                           <div class="row justify-content-center">
                             <a href="newreservation.php?objid='.$ro['Object_ID'].'&userid='.$_SESSION['User_ID'].'" class="btn btn-light text-dark">Reserve now</a>
                           </div>
@@ -117,44 +117,6 @@
               </div>';
             }
           };
-          /* $sql_objekti = 'SELECT * FROM `object`';
-          $res_obj = $conn->query($sql_objekti);
-          $sql_useri = 'SELECT * FROM `user`';
-          $res_user = $conn->query($sql_useri);
-
-          while($row_obj = $res_obj->fetch_assoc())
-          {
-            echo
-            '
-              <div class="col col-sm-12 m-3">
-                <div class="card kartice">
-                  <div class="card-body">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-2">
-                          <img src="media/ubaci.jpeg" alt="slika" width="100%"></img>
-                        </div>
-                        <div class="col-7">
-                          <div class="row">
-                            Host: '.$row_obj['First_name'].' '.row_obj['Last_name'].'
-                          </div>
-                          <br>
-                          <div class="row">
-                            Description:<br>
-                            Ova kuca je mega. Imate kuhinju i dnevni boravak, wi-fi, televiziju, sve sto ce vam ikad trebat u zivotu. Parking je besplatan.
-                          </div>
-                        </div>
-                        <div class="col text-right">
-                          Price for one night: <br>
-                          1.000,00 HRK
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ';
-          } */
           ?>
           
             </div>
@@ -162,10 +124,6 @@
          </div>
       </div>
    </div>
-
-    
- 
-           
             
           <!--Footer-->  
       <div class="container-fluid">
@@ -175,8 +133,6 @@
             </div>
         </div>
       </div>
-   
-    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
