@@ -6,5 +6,6 @@
     $sql_become_host = 'UPDATE `user` SET `Type_ID`=2 where User_ID = '.$userID.';';
     $conn->query($sql_become_host);
     $_SESSION['Type_ID'] = "2";
+    $_SESSION['postao'] = "1";
     header('Location: host_profile_page.php');
 ?>

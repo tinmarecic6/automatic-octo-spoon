@@ -49,55 +49,6 @@
         </div>  
       </div>
      </div>
-     <!--Update info error row-->
-     <div class="row justify-content-md-center">
-      <div class="col col-md-10 ">
-            <?php
-            if(isset($_POST['fname']) && $_POST['fname']!==''){
-              $sql_update_fname = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
-              $conn->query($sql_update_fname);
-              unset($_POST);
-              echo 'mjenjam ime';
-              
-            } 
-            if(isset($_POST['lname']) && $_POST['lname']!==''){
-              $sql_update_lname = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
-              $conn->query($sql_update_lname);
-              unset($_POST);
-              echo 'mjenjam prezime';
-            }
-            
-            if(isset($_POST['dob']) && $_POST['dob']!==''){
-              $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
-              $conn->query($sql_update_dob);
-              unset($_POST);
-              echo 'mjenjam dob';
-            }
-            #fix duplicate pic creation and remove post after upload
-            if(isset($_FILES['profile_pic']['tmp_name'])){
-              $target_dir = "media/pictures/";
-              $ext = pathinfo($_FILES['profile_pic']['name']);
-              $target_file = $target_dir . rand() .'.'.$ext['extension'];
-              $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$_SESSION['User_ID'].';';
-              if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)) {
-                $conn->query($sql_update_profile_pic);
-                echo 'mjenjam sliku';
-                unset($_FILES);
-
-
-              } 
-              else {
-                echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
-                There was an error uploading your picture!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button></div>';
-              }
-              
-            }
-            ?>
-      </div>
-     </div>
      <!--User info-->
      <div class="row justify-content-md-center">
        <div class="col col-md-2 text-center user_info ">

@@ -238,6 +238,21 @@
               endif;
             ?>
 
+            <?php
+              if(isset($_SESSION['postao']) && $_SESSION['postao'] == 1):
+          ?>
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>You are now a host!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+          
+            <?php
+              $_SESSION['postao'] = 0;
+              endif;
+            ?>
+
          <!--if has no past reservations show "You have no objects, host your first!-->
          <h3 class="mt-4 mb-4">Your objects</h3>
          <div class="row">
