@@ -41,7 +41,7 @@
           <?php 
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'];}
+            echo $row['Username'].' -- User';}
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
@@ -55,23 +55,31 @@
      <div class="row justify-content-md-center">
       <div class="col col-md-10 ">
             <?php
+            if(isset($_POST['username']) && $_POST['username']!==''){
+              $sql_update_username = 'UPDATE user set Username = "'.$_POST['username'].'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_username);
+            }
+
+            if(isset($_POST['password']) && $_POST['password']!==''){
+              $sql_update_password = 'UPDATE user set Password = "'.md5($_POST['username']).'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_password);
+            }
+
             if(isset($_POST['fname']) && $_POST['fname']!==''){
               $sql_update_fname = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_fname);
+            }
 
-              
-            } 
             if(isset($_POST['lname']) && $_POST['lname']!==''){
               $sql_update_lname = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_lname);
-              $_POST = array();
-              header("Refresh:1");
             }
             
             if(isset($_POST['dob']) && $_POST['dob']!==''){
               $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_dob);
             }
+
             if(isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error']!=4){
               if(isset($_FILES['profile_pic']['tmp_name'])){
                 $target_dir = "media/pictures/";
@@ -81,7 +89,6 @@
                 if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)==1) {
                   $conn->query($sql_update_profile_pic);
                   $_FILES = array();
-                  header("Refresh:1");
                 }
                 else {
                   echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
@@ -122,32 +129,48 @@
               <!--Modal-->
               <div class="modal fade" id="infoedit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                  <div class="modal-content kartice">
                     <div class="modal-header">
-                      <h5 class="modal-title text-dark" id="exampleModalLabel">
+                      <h5 class="modal-title" id="exampleModalLabel">
                       <?php
                       #username-title
-                      echo $row['First_name'].'   '.$row['Last_name'];
+                      echo 'Name: '.$row['First_name'].' '.$row['Last_name'];
                       ?></h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body text-center text-dark">
-                      <form enctype="multipart/form-data" name="edit_info" method="POST"  acton="?user=<?php echo $_SESSION['User_ID']; ?>">
-                        First name: <input type="text" name="fname" class="m-2 text-dark" placeholder="<?php echo $row['First_name']; ?>"><br>
-                        Last name:  <input type="text" name="lname" class="m-2 text-dark" placeholder="<?php echo $row['Last_name']; ?>"required><br>
-                        Date of birth: <input type="date" name="dob" class="m-2 text-dark" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>
-                        Upload or change your profile picture:<br> <input type="file" class="form-control-file text-dark" name="profile_pic" id="profile_pic">
+                    <div class="modal-body text-left ml-3">
+                      <form enctype="multipart/form-data" name="edit_info" method="POST"  action="?user=<?php echo $_SESSION['User_ID']; ?>">
+                        <div class="row">
+                          <div class="col-3">Username:</div>
+                          <div class="col"><input type="text" name="username" class="m-2" placeholder="<?php echo $row['Username'] ?>"></div>
                         </div>
-                      <div class="modal-footer">
+                        <div class="row">
+                          <div class="col-3">Password:</div>
+                          <div class="col"><input type="text" name="password" class="m-2" placeholder="********"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">First name:</div>
+                          <div class="col"><input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">Last name:</div>
+                          <div class="col"><input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">Date of birth:</div>
+                          <div class="col"><input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"></div>
+                        </div>
+                        Upload or change your profile picture:<br><br> <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
+                    </div>
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit"  class="btn btn-primary text-light" value="Save changes">
                       </form>
                     </div>
                   </div>
                 </div>
-                
               </div>
               <hr>
               <div class="row m-4 justify-content-md-center">

@@ -41,7 +41,7 @@
           <?php 
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'];}
+            echo $row['Username'].' -- Host';}
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
@@ -51,51 +51,60 @@
         </div>  
       </div>
      </div>
+
      <!--Update info error row-->
      <div class="row justify-content-md-center">
       <div class="col col-md-10 ">
             <?php
+            if(isset($_POST['username']) && $_POST['username']!==''){
+              $sql_update_username = 'UPDATE user set Username = "'.$_POST['username'].'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_username);
+              $changed = 1;
+            }
+
+            if(isset($_POST['password']) && $_POST['password']!==''){
+              $sql_update_password = 'UPDATE user set Password = "'.md5($_POST['username']).'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_password);
+              $changed = 1;
+            }
+
             if(isset($_POST['fname']) && $_POST['fname']!==''){
               $sql_update_fname = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_fname);
-              unset($_POST);
-              echo 'mjenjam ime';
-              
-            } 
+              $changed = 1;
+            }
+
             if(isset($_POST['lname']) && $_POST['lname']!==''){
               $sql_update_lname = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_lname);
-              unset($_POST);
-              echo 'mjenjam prezime';
+              $changed = 1;
             }
             
             if(isset($_POST['dob']) && $_POST['dob']!==''){
               $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_dob);
-              unset($_POST);
-              echo 'mjenjam dob';
+              $changed = 1;
             }
-            #fix duplicate pic creation and remove post after upload
-            if(isset($_FILES['profile_pic']['tmp_name'])){
-              $target_dir = "media/pictures/";
-              $ext = pathinfo($_FILES['profile_pic']['name']);
-              $target_file = $target_dir . rand() .'.'.$ext['extension'];
-              $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$_SESSION['User_ID'].';';
-              if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)) {
-                $conn->query($sql_update_profile_pic);
-                echo 'mjenjam sliku';
-                unset($_FILES);
-
-
-              } 
-              else {
-                echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
-                There was an error uploading your picture!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button></div>';
+            
+            if(isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error']!=4){
+              if(isset($_FILES['profile_pic']['tmp_name'])){
+                $target_dir = "media/pictures/";
+                $ext = pathinfo($_FILES['profile_pic']['name']);
+                $target_file = $target_dir . rand() .'.'.$ext['extension'];
+                $sql_update_profile_pic = 'UPDATE user set User_image = "'.basename($target_file).'" where User_ID='.$_SESSION['User_ID'].';';
+                if (move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $target_file)==1) {
+                  $conn->query($sql_update_profile_pic);
+                  $_FILES = array();
+                }
+                else {
+                  echo '<div class="alert alert-warning alert-dismissable fade show" role="alert">
+                  There was an error uploading your picture!
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button></div>';
+                }
+                $changed = 1;
               }
-              
             }
             ?>
       </div>
@@ -130,29 +139,46 @@
                   <div class="modal-content kartice">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">
-                      <?php
-                      #username-title
-                      echo $row['First_name'].'   '.$row['Last_name'];
-                      ?></h5>
+                        <?php
+                          #username-title
+                          echo 'Name: '.$row['First_name'].' '.$row['Last_name'];
+                        ?>
+                      </h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body text-center">
-                      <form enctype="multipart/form-data" name="edit_info" method="POST"  acton="?user=<?php echo $_SESSION['User_ID']; ?>">
-                        First name: <input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"><br>
-                        Last name:  <input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"><br>
-                        Date of birth: <input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>
-                        Upload or change your profile picture: <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
+                    <div class="modal-body text-left ml-3">
+                      <form enctype="multipart/form-data" name="edit_info" method="POST"  action="?user=<?php echo $_SESSION['User_ID']; ?>">
+                        <div class="row">
+                          <div class="col-3">Username:</div>
+                          <div class="col"><input type="text" name="username" class="m-2" placeholder="<?php echo $row['Username']; ?>"></div>
                         </div>
-                      <div class="modal-footer">
+                        <div class="row">
+                          <div class="col-3">Password:</div>
+                          <div class="col"><input type="text" name="password" class="m-2" placeholder="********"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">First name:</div>
+                          <div class="col"><input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">Last name:</div>
+                          <div class="col"><input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">Date of birth:</div>
+                          <div class="col"><input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"></div>
+                        </div>
+                        Upload or change your profile picture:<br><br> <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
+                    </div>
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit"  class="btn btn-primary text-light" value="Save changes">
                       </form>
                     </div>
                   </div>
                 </div>
-                
               </div>
               <hr>
               <div class="row m-4 justify-content-md-center">
@@ -162,9 +188,26 @@
         </div>
 
     <div class="col col-md-7 text-center reservations_p shadow">
-        
       <?php
-      if(isset($_SESSION['insertedobj']) && $_SESSION['insertedobj'] == 1):
+        if(isset($changed) && $changed == 1)
+          {$_SESSION['changed'] = 1;};
+      ?>
+      <?php
+        if(isset($_SESSION['changed']) && $_SESSION['changed'] == 1):
+      ?>
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+            <strong>Success! </strong>Your info has been edited.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      <?php
+        header("Refresh:0");
+        $_SESSION['changed'] = 0;
+        endif;
+      ?>
+      <?php
+        if(isset($_SESSION['insertedobj']) && $_SESSION['insertedobj'] == 1):
       ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success! </strong>New object has been hosted.
@@ -173,8 +216,8 @@
             </button>
         </div>
       <?php
-      $_SESSION['insertedobj'] = 0;
-      endif;
+        $_SESSION['insertedobj'] = 0;
+        endif;
       ?>
 
          <!--if has no past reservations show "You have no objects, host your first!-->

@@ -49,7 +49,7 @@
           $result = $conn->query($sql_user);
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'].'--Admin';
+            echo $row['Username'].' -- Admin';
           }
           ?>
           </h6>
