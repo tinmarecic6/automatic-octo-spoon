@@ -56,6 +56,7 @@
      <div class="row justify-content-md-center">
       <div class="col col-md-10 ">
             <?php
+            $changed=0; 
             if(isset($_POST['username']) && $_POST['username']!==''){
               $sql_update_username = 'UPDATE user set Username = "'.$_POST['username'].'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_username);
@@ -88,6 +89,7 @@
             
             if(isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error']!=4){
               if(isset($_FILES['profile_pic']['tmp_name'])){
+                $changed = 1;
                 $target_dir = "media/pictures/";
                 $ext = pathinfo($_FILES['profile_pic']['name']);
                 $target_file = $target_dir . rand() .'.'.$ext['extension'];
@@ -103,7 +105,6 @@
                   <span aria-hidden="true">&times;</span>
                   </button></div>';
                 }
-                $changed = 1;
               }
             }
             ?>
@@ -190,11 +191,12 @@
     <div class="col col-md-7 text-center reservations_p shadow">
       <?php
         if(isset($changed) && $changed == 1)
-          {$_SESSION['changed'] = 1;};
+        {
+          $_SESSION['changed'] = 1;
+          $changed=0;
+        };
       ?>
-      <?php
-        if(isset($_SESSION['changed']) && $_SESSION['changed'] == 1):
-      ?>
+      <?php if(isset($_SESSION['changed']) && $_SESSION['changed'] == 1):?>
         <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
             <strong>Success! </strong>Your info has been edited.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -202,8 +204,8 @@
             </button>
         </div>
       <?php
-        header("Refresh:0");
         $_SESSION['changed'] = 0;
+
         endif;
       ?>
       <?php
