@@ -101,139 +101,43 @@
      <div class="row justify-content-md-center">
        <div class="col col-md-2 text-center user_info ">
        <?php
-          $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE '.$_GET['Object_ID'].'.User_ID = user.User_ID';
+          $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE object.User_ID = user.User_ID AND object.Object_ID = '.$_GET['objid'].';';
           $res_obj_usr = $conn->query($sql_objekti_user);
-          var_dump($_GET['Object_ID']);
+          foreach($res_obj_usr as $r)
+          {
        ?>
         <!--if pic property of user table is empty show stock image-->
-        <img src="https://static.ferienhausmiete.de/pictures/125531/bilder_original/125531_22829505223751.jpg" alt="slika" width="100%">
           <div class="text-center">
           <h4><div class="mt-2">Object info</div></h4>
             <hr>
-            Host name: <?php echo $r['First_name'].' '.$r['Last_name']?><br>
-            Object name: <?php echo $res['First_name']?><br>
-            Object description:  <?php echo $row['Last_name']?><br>
-            Price per night:  <?php echo $row['Last_name']?><br>
+            <strong>Host name:</strong> <?php echo $r['First_name'].' '.$r['Last_name']?><br>
+            <strong>Object name:</strong> <?php echo $r['Object_name']?><br>
+            <strong>Object description:</strong>  <?php echo $r['Object_desc']?><br>
+            <strong>Price per night:</strong>  <?php echo $r['Price'].'€'?><br>
               <br>
+            <?php
+              if($_SESSION['Type_ID'] == 2 && $r['User_ID'] == $_SESSION['User_ID'])
+              {
+            ?>
+            <div class="row m-4 justify-content-md-center">
+              <form name="upload" action="upload_slika.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="files[]" multiple>
+              </form>
+            </div>
+            <?php
+              };
+            ?>
               <!--Modal trigger-->
-              <button type="button" class="btn btn-secondary m-3" data-toggle="modal" data-target="#infoedit">
-                  Edit
-              </button>
-              <!--Modal-->
-              <div class="modal fade" id="infoedit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content kartice">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
-                      <?php
-                      #username-title
-                      echo $row['First_name'].'   '.$row['Last_name'];
-                      ?></h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body text-center">
-                      <form enctype="multipart/form-data" name="edit_info" method="POST"  acton="?user=<?php echo $_SESSION['User_ID']; ?>">
-                        First name: <input type="text" name="fname" class="m-2" placeholder="<?php echo $row['First_name']; ?>"><br>
-                        Last name:  <input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"><br>
-                        Date of birth: <input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"><br>
-                        Upload or change your profile picture: <input type="file" class="form-control-file" name="profile_pic" id="profile_pic">
-                        </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit"  class="btn btn-primary text-light" value="Save changes">
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-              <hr>
-              <div class="row m-4 justify-content-md-center">
-              <a class="btn btn-secondary text-light" href="newobject.php">Host a new home!</a>
-              </div>
+              <?php
+                };
+                ?>
           </div>
         </div>
 
          <div class="col col-md-7 text-center reservations_p shadow">
-        
-      <?php
-        if(isset($_SESSION['insertedobj']) && $_SESSION['insertedobj'] == 1):
-      ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success! </strong>New object has been hosted.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <img src="https://static.ferienhausmiete.de/pictures/125531/bilder_original/125531_22829505223751.jpg" alt="slika" width="100%">
         </div>
-      <?php
-      $_SESSION['insertedobj'] = 0;
-      endif;
-      ?>
-
-         <!--if has no past reservations show "You have no objects, host your first!-->
-         <h3 class="mt-4 mb-4">Your objects</h3>
-         <div class="row">
-         <?php
-          $sql_objects = 'SELECT * FROM `object` where object.User_ID = '.$_SESSION['User_ID'].';';
-          $result_objects = $conn->query($sql_objects);
-          if($result_objects->num_rows>0){
-            foreach ($result_objects as $ro){
-              echo '
-                <div class="col col-sm-3 m-2">
-                <div class="card kartice">
-                <div class="card-body" style="height: 15rem;">
-                <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Object no. '.$ro['Object_ID'].'</h5>
-                <h6 class="card-subtitle mt-4" style="height: 6rem;">
-                  Object name: '.$ro['Object_name'].' <br>
-                  Price: '.$ro['Price'].'<br>
-                  Location: '.$ro['Location_ID'].'
-                </h6>
-                <hr style="border-bottom: 1px dashed white;">
-                  <div class="row">
-                    <a href="#" class="col card-link mt-auto">View info</a>
-                    <a href="#" class="col card-link mt-auto">Delete</a>
-                  </div>
-                </div>
-                </div>
-                </div>
-            '; 
-            }
-          }
-          ?>
-          </div>
-          <!--if has no past reservations show "You have no reservations, make your first!-->
-         <h3 class="mt-4">Your past reservations</h3>
-          <!--reservation info goes here-->
-          <div class="text-left">
-          <div class="container-fluid">
-            <div class="row justify-content-left mt-5">
-          <?php
-          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].';';
-          $result_vacay = $conn->query($sql_vacay);
-          if($result_vacay->num_rows>0){
-            foreach ($result_vacay as $rv){
-              echo '<div class="col col-sm-3 m-2 mb-4">
-              <div class="card kartice" >
-                  <div class="card-body">
-                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
-                    <h6 class="card-subtitle mt-4">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
-                    <hr>
-                    <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
-                    <a href="#" class="card-link">View info</a>
-                    <a href="#" class="card-link">Delete</a>
-                  </div>
-                </div>
-              </div>'; 
-          }
-        }
-          ?>
-            </div>
-          </div>
-         </div>
-      </div>
-   </div>     
+      </div>     
           <!--Footer-->  
       <div class="container-fluid">
         <div class="row-fluid">
@@ -242,7 +146,7 @@
             </div>
         </div>
       </div>
-      
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
