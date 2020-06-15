@@ -51,10 +51,14 @@
               </div>
                         <?php
                           session_start();
-                          if(isset($_SESSION['error_mess'])){
-                            echo $_SESSION['error_mess'];
-                            unset($_SESSION['error_mess']);
+                          if(isset($_SESSION['login_fail']) && $_SESSION['login_fail']){
+                            echo '<div class="alert alert-danger alert-dismissable fade show" role="alert">
+                            Krivi Username ili password
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button></div>';
                           }
+                          
                         ?>
               <br>
               <a class="btn btn-primary m-3 " data-toggle="collapse" href="#collapseSignup" role="button" aria-expanded="false" aria-controls="collapseSignup">

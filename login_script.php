@@ -8,11 +8,11 @@ $pass = md5($_POST['pass']);
 $sql_user = 'SELECT * from `user` where Username="'.$username.'" and Password="'.$pass.'";';
 $result = $conn->query($sql_user);
 session_start();
-$_SESSION['error_mess'] = '<div class="alert alert-danger alert-dismissable fade show" role="alert">
+/* $_SESSION['error_mess'] = '<div class="alert alert-danger alert-dismissable fade show" role="alert">
 Krivi Username ili password
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 <span aria-hidden="true">&times;</span>
-</button></div>';
+</button></div>'; */
 if($result && $result->num_rows==1){
     $row = $result->fetch_assoc();
     $_SESSION['username']=$username;
@@ -27,6 +27,7 @@ if($result && $result->num_rows==1){
 }
 else{
     header("Location: index.php"); 
+    $_SESSION['login_fail']=1;
 }
 
 ?>
