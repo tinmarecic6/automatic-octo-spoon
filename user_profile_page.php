@@ -183,37 +183,48 @@
           $sql
         ?>
         <!--if has no past reservations show "You have no reservations, make your first!-->
-         <div class="col col-md-7 text-center reservations_p shadow"><h3 class="mt-4">Your past reservations</h3>
-          <!--reservation info goes here-->
-          <div class="text-left">
-          <div class="container-fluid">
-            <div class="row justify-content-center mt-5">
+         <div class="col col-md-7 text-center reservations_p shadow">
           <?php
-          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and object.User_ID = '.$_SESSION['User_ID'].' ;';
+              if(isset($_SESSION['deleted']) && $_SESSION['deleted'] == 1):
+          ?>
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>Your reservation has been deleted.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+          
+            <?php
+              $_SESSION['deleted'] = 0;
+              endif;
+            ?>
+
+           <h3 class="mt-4 mb-4">Your reservations</h3>
+          <!--reservation info goes here-->
+            <div class="row">
+          <?php
+          $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and reservation.Object_ID = object.Object_ID ;';
           $result_vacay = $conn->query($sql_vacay);
           if($result_vacay->num_rows>0){
             foreach ($result_vacay as $rv){
-              echo '<div class="col col-sm-3 m-2">
-              <div class="card" >
-                  <div class="card-body">
-                    <h5 class="card-title text-dark"><img src="media/house.svg" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
-                    <h6 class="card-subtitle  text-muted">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
-                    <hr>
-                    <p class="card-text text-dark ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
-                    <a href="delete_res.php?resid="'.$rv['Reservation_ID'].'"" class="text-primary card-link">Delete</a>
+              echo '<div class="col col-sm-4 m-0 mb-5">
+              <div class="card kartice">
+                  <div class="card-body" style="height: 10%;">
+                    <h5 class="card-title"><img src="media/palm.png" class="mr-3" height="22">Vacation no. '.$rv['Reservation_ID'].'</h5>
+                    <h6 class="card-subtitle mt-4">Start date: '.$rv['Date_from'].'<br>End date: '.$rv['Date_to'].'</h6>
+                    <p class="card-text mt-3">You booked a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
+                    <hr style="border-bottom: 1px dashed white;">
+                    <a href="res_delete.php?resid='.$rv['Reservation_ID'].'" class="col card-link mt-auto">Delete</a>
                   </div>
                 </div>
-              </div>'; 
+              </div>';
           }
         }
         else{
-          echo '<div class="mt-4 text-light">You have no reservations, reserve now!';
-          echo '<div class="row"><a href="homepage.php" class="col m-3 btn btn-outline-light"><h5 class="mt-2">Reserve here</h5></a></div>';
+          echo '</div><div class="row justify-content-center align-items-center">You have no reservations, reserve now!</div>';
+          echo '<div class="row justify-content-center align-items-center"><a href="homepage.php" class="col-3 m-3 btn btn-outline-light"><h5 class="mt-2">Reserve here</h5></a></div>';
         }
           ?>
-            </div>
-          </div>
-         </div>
       </div>
    </div>     
           <!--Footer-->  

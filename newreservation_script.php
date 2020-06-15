@@ -21,7 +21,7 @@
       if ($conn->query($sql_unos))
     {
         $_SESSION['insertedres'] = 1;
-        header("Location: homepage.php");
+        header("Location: profile_redirect.php");
     }
     else
     {

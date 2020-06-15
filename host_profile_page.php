@@ -255,7 +255,22 @@
           ?>
           </div>
           <!--if has no past reservations show "You have no reservations, make your first!-->
-         <h3 class="mt-4 mb-4">Your past reservations</h3>
+          <div class="mt-4 mb-4"></div>
+          <?php
+              if(isset($_SESSION['deleted']) && $_SESSION['deleted'] == 1):
+          ?>
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>Your reservation has been deleted.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+          
+            <?php
+              $_SESSION['deleted'] = 0;
+              endif;
+            ?>
+         <h3 class="mt-4 mb-4">Your reservations</h3>
           <!--reservation info goes here-->
           <div class="row">
           <?php
@@ -268,15 +283,17 @@
                   <div class="card-body" style="height: 10%;">
                     <h5 class="card-title"><img src="media/palm.png" class="mr-3" height="22">Vacation ID: '.$rv['Reservation_ID'].'</h5>
                     <h6 class="card-subtitle mt-4">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
-                    <hr>
-                    <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
+                    <p class="card-text mt-3">You booked a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
                     <hr style="border-bottom: 1px dashed white;">
-                    <a href="#" class="col card-link mt-auto">View info</a>
-                    <a href="#" class="col card-link mt-auto">Delete</a>
+                    <a href="res_delete.php?resid='.$rv['Reservation_ID'].'" class="col card-link mt-auto">Delete</a>
                   </div>
                 </div>
               </div>'; 
           }
+        }
+        else{
+          echo '<div class="mt-4 text-light">You have no reservations, reserve now!</div>';
+          echo '<div class="row"><a href="homepage.php" class="col m-3 btn btn-outline-light"><h5 class="mt-2">Reserve here</h5></a></div>';
         }
           ?>
             </div>

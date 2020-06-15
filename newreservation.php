@@ -65,14 +65,14 @@
                 <h3 class="mb-5 text-light">Choose your reservation dates:</h3>
                 <div class="row justify-content-center">
                 </div>
-                <div class="row justify-content-left">
+                <div class="row justify-content-center">
                     <div class="col-3 form-group">
                     <fieldset>
                       <div class="control-group">
                         <div class="controls">
                         <div class="input-prepend input-group">
                           <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                          <input required type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" autocomplete="off"  placeholder="Razdoblje boravka" /> 
+                          <input required type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" autocomplete="off"  placeholder="Choose your dates" /> 
                         </div>
                         </div>
                       </div>
