@@ -161,7 +161,7 @@
           </div>
         </div>
 
-         <div class="col col-md-7 text-center reservations_p shadow">
+    <div class="col col-md-7 text-center reservations_p shadow">
         
       <?php
       if(isset($_SESSION['insertedobj']) && $_SESSION['insertedobj'] == 1):
@@ -186,9 +186,9 @@
           if($result_objects->num_rows>0){
             foreach ($result_objects as $ro){
               echo '
-                <div class="col col-sm-3 m-2">
+                <div class="col col-sm-4 m-0">
                 <div class="card kartice">
-                <div class="card-body" style="height: 15rem;">
+                <div class="card-body" style="height: 10%;">
                 <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Object no. '.$ro['Object_ID'].'</h5>
                 <h6 class="card-subtitle mt-4" style="height: 6rem;">
                   Object name: '.$ro['Object_name'].' <br>
@@ -201,33 +201,32 @@
                     <a href="#" class="col card-link mt-auto">Delete</a>
                   </div>
                 </div>
-                </div>
-                </div>
+              </div>
+            </div>
             '; 
             }
           }
           ?>
           </div>
           <!--if has no past reservations show "You have no reservations, make your first!-->
-         <h3 class="mt-4">Your past reservations</h3>
+         <h3 class="mt-4 mb-4">Your past reservations</h3>
           <!--reservation info goes here-->
-          <div class="text-left">
-          <div class="container-fluid">
-            <div class="row justify-content-left mt-5">
+          <div class="row">
           <?php
           $sql_vacay = 'SELECT * FROM reservation,object where reservation.User_ID = '.$_SESSION['User_ID'].' and reservation.Object_ID=object.Object_ID ;';
           $result_vacay = $conn->query($sql_vacay);
           if($result_vacay->num_rows>0){
             foreach ($result_vacay as $rv){
-              echo '<div class="col col-sm-3 m-2 mb-4">
-              <div class="card kartice" >
-                  <div class="card-body">
-                    <h5 class="card-title"><img src="media/house.svg" class="mr-3" height="22">Vacation ID --  '.$rv['Reservation_ID'].'</h5>
+              echo '<div class="col col-sm-4 m-0 mb-5">
+              <div class="card kartice">
+                  <div class="card-body" style="height: 10%;">
+                    <h5 class="card-title"><img src="media/palm.png" class="mr-3" height="22">Vacation ID: '.$rv['Reservation_ID'].'</h5>
                     <h6 class="card-subtitle mt-4">Start date: '.$rv['Date_from'].' <br>End date: '.$rv['Date_to'].'</h6>
                     <hr>
                     <p class="card-text ">You went on a trip to '.$rv['Object_name'].' for a price of '.$rv['Price'].' € per night</p>
-                    <a href="#" class="card-link">View info</a>
-                    <a href="#" class="card-link">Delete</a>
+                    <hr style="border-bottom: 1px dashed white;">
+                    <a href="#" class="col card-link mt-auto">View info</a>
+                    <a href="#" class="col card-link mt-auto">Delete</a>
                   </div>
                 </div>
               </div>'; 
@@ -235,8 +234,6 @@
         }
           ?>
             </div>
-          </div>
-         </div>
       </div>
    </div>     
           <!--Footer-->  

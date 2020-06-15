@@ -68,7 +68,19 @@
           <div class="text-left">
           <div class="container-fluid">
             <?php
-            if(isset($_SESSION['insertedadmin']) && $_SESSION['insertedadmin'] == 1):
+              if(isset($_SESSION['deleted']) && $_SESSION['deleted'] == 1):
+            ?>
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>One record has been deleted.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+
+            <?php
+              $_SESSION['insertedadmin'] = 0;
+              endif;
+              if(isset($_SESSION['insertedadmin']) && $_SESSION['insertedadmin'] == 1):
             ?>
               <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
                   <strong>Success! </strong>Your changes have been saved.
@@ -77,8 +89,8 @@
                   </button>
               </div>
             <?php
-            $_SESSION['insertedadmin'] = 0;
-            endif;
+              $_SESSION['deleted'] = 0;
+              endif;
             ?>
             <div class="row justify-content-left mt-5">
 
