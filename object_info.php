@@ -158,10 +158,9 @@
          <?php else:?>
          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="position: relative;">
           <div class="carousel-inner p-5">
-
-            <div class="carousel-item active">
+            <div class="carousel-item active ">
               <?php
-              echo '<img class="d-block w-100" src="media/object_images/'.$rs['Picture'].'" alt="'.$rs['Picture'].'">'; ?>
+              echo '<img class="pt-4" style="max-width:80%;" src="media/object_images/'.$rs['Picture'].'" alt="'.$rs['Picture'].'">'; ?>
             </div>
             <?php 
             $i = 1;
@@ -171,7 +170,7 @@
                 echo
                 '
                 <div class="carousel-item">
-                  <img class="d-block w-100" src="media/object_images/'.$rs['Picture'].'" alt="'.$rs['Picture'].'">
+                  <img class="pt-4" style="max-width:80%;" src="media/object_images/'.$rs['Picture'].'" alt="'.$rs['Picture'].'">
                 </div>
                 '; 
               }
