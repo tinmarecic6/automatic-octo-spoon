@@ -223,6 +223,21 @@
         endif;
       ?>
 
+          <?php
+              if(isset($_SESSION['deletedobject']) && $_SESSION['deletedobject'] == 1):
+          ?>
+            <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>Your object has been deleted.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+          
+            <?php
+              $_SESSION['deletedobject'] = 0;
+              endif;
+            ?>
+
          <!--if has no past reservations show "You have no objects, host your first!-->
          <h3 class="mt-4 mb-4">Your objects</h3>
          <div class="row">
@@ -244,7 +259,7 @@
                 <hr style="border-bottom: 1px dashed white;">
                   <div class="row">
                     <a href="object_info.php?objid='.$ro['Object_ID'].'" class="col card-link mt-auto">View info</a>
-                    <a href="#" class="col card-link mt-auto">Delete</a>
+                    <a href="object_delete.php?objid='.$ro['Object_ID'].'" class="col card-link mt-auto">Delete</a>
                   </div>
                 </div>
               </div>
@@ -292,8 +307,8 @@
           }
         }
         else{
-          echo '<div class="mt-4 text-light">You have no reservations, reserve now!</div>';
-          echo '<div class="row"><a href="homepage.php" class="col m-3 btn btn-outline-light"><h5 class="mt-2">Reserve here</h5></a></div>';
+          echo '</div><div class="row justify-content-center align-items-center">You have no reservations, reserve now!</div>';
+          echo '<div class="row justify-content-center align-items-center"><a href="homepage.php" class="col-3 m-3 btn btn-outline-light"><h5 class="mt-2">Reserve here</h5></a></div>';
         }
           ?>
             </div>
