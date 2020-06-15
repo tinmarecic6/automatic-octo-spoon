@@ -14,8 +14,8 @@
     $sql_unos = 'INSERT INTO `object`
                 (`Object_ID`, `Object_name`, `Price`, `Object_desc`, `Location_ID`, `User_ID`) 
                 VALUES (NULL, "'.$objectname.'", '.$price.', "'.$objectdesc.'", '.$locationid.', '.$_SESSION['User_ID'].');';
-    echo $sql_unos;
 
+    
     if ($conn->query($sql_unos))
     {
         $_SESSION['insertedobj'] = 1;

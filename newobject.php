@@ -55,15 +55,15 @@
       $result_loc=$conn->query($sql_loc_id);
     ?>
 
-     <form class="container mt-3 pt-4" name="newobj" method="POST" action="newobject_script.php">
+     <form class="container mt-3 pt-4" name="newobj" method="POST" action="newobject_script.php" enctype="multipart/form-data">
                 <h3 class="mb-5">Object info:</h3>
                 
                 <div class="row">
                     <div class="col form-group">
-                        <input type="text" class="form-control" id="objectname" name="objectname" placeholder="Object name">
+                        <input type="text" class="form-control" id="objectname" name="objectname" placeholder="Object name" required>
                     </div>
                     <div class="col form-group">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="Price">
+                        <input type="number" class="form-control" id="price" name="price" placeholder="Price" required>
                     </div>
                 </div>
                 <div class="row">
@@ -79,11 +79,14 @@
                       <select class="form-control" id="locationid" name="locationid">';
                           <?php 
                             foreach($result_loc as $l){
-                                echo '<option value="'.$l['Location_ID'].'">'.$l['City'].'</option>';
+                                echo '<option value="'.$l['Location_ID'].'" required>'.$l['City'].'</option>';
                             }
                           ?>
                       </select>
                   </div>
+                </div>
+                <div class="row justify-content-center m-3 p-3">
+                      <input type="file" name="files[]" multiple>
                 </div>
                 <div class="row justify-content-center mt-5">
                     <input type="submit" class="col-2 btn btn-secondary text-light" value="Host">
