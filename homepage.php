@@ -68,10 +68,12 @@
           <?php #izdenifirat polje za naslovnu sliku objekta?
           $sql_objekti_user = 'SELECT * FROM `object`,`user` WHERE object.User_ID = user.User_ID';
           $res_obj_usr = $conn->query($sql_objekti_user);
-          $sql_slike = 'SELECT * FROM `object_images` WHERE `object_images`.Object_ID = `object`.Object_ID;';
           if($res_obj_usr->num_rows>=1){
             echo 'No. of available places for you: &nbsp<b><p>'.$res_obj_usr->num_rows.'</p></b>';
             foreach($res_obj_usr as $ro){
+              $sql_slike = 'SELECT * FROM object_images,object WHERE object_images.Object_ID = '.$ro['Object_ID'].' and object.Object_ID = '.$ro['Object_ID'].';';
+              $res_obj_slike = $conn->query($sql_slike);
+              $slike = $res_obj_slike->fetch_assoc();
               echo '
               <div class="col col-sm-12 m-3">
                 <div class="card kartice">
@@ -79,7 +81,7 @@
                     <div class="container">
                       <div class="row">
                         <div class="col-3 float-left">';
-                        echo'<img src="https://static.ferienhausmiete.de/pictures/125531/bilder_original/125531_22829505223751.jpg" alt="slika" width="100%"></img>';
+                          echo'<img src="media/object_images/'.$slike['Picture'].'" alt="slika" width="100%"></img>';
                           echo '
                         </div>
                         <div class="col-7">
