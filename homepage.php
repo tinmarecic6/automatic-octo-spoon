@@ -84,15 +84,15 @@
                         </div>
                         <div class="col-7">
                           <div class="row">
-                            Host: '.$ro['First_name'].' '.$ro['Last_name'].'
+                          <strong>Host</strong>: '.$ro['First_name'].' '.$ro['Last_name'].'
                           </div>
                           <br>
                           <div class="row">
-                            Object name: '.$ro['Object_name'].'
+                          <strong>Object name</strong>: '.$ro['Object_name'].'
                           </div>
                           <br>
                           <div class="row">
-                            Description:<br>
+                            <strong>Description</strong><br>
                             '.$ro['Object_desc'].'
                           </div>
                         </div>

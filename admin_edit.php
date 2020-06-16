@@ -162,7 +162,7 @@
 
 ?>
 </head>
-<body>
+<body class="text-light">
 
 <!--User info edit-->
     <?php if(isset($_GET['userid'])): ?>
@@ -279,12 +279,12 @@
                     </fieldset>
                 </div>
                 <div class="form-check">
+                    <label class="form-check-label pr-3" for="status">Status</label>
                     <input type="checkbox" class="form-check-input" name="status" value="1">
-                    <label class="form-check-label" for="status">Status</label>
                 </div>
                 <div class="form-check">
+                    <label class="form-check-label pr-2" for="confirmed">Confirmed</label>
                     <input type="checkbox" class="form-check-input" name="confirmed" value="1">
-                    <label class="form-check-label" for="confirmed">Confirmed</label>
                 </div>
                 <div class="row justify-content-center mt-5">
                     <input type="submit" class="col-2 btn btn-secondary text-light" value="Update">
@@ -294,6 +294,14 @@
                 </div>
             </form>
         <?php endif;?>
+         <!--Footer-->  
+      <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-sm-12 p-4 text-center footer">
+              Courtesy of TIN_MAR&co &copy
+            </div>
+        </div>
+      </div>
 
 <!--Datepicker-->
 <script type="text/javascript">

@@ -103,6 +103,55 @@
               <br>
               We are here to help with that, simply login and start searching, it is that easy!
             </div>
+            <div class="col-sm-4 m-1 p-5 login_info text-muted">
+            <strong>Login info:</strong><br>
+              <table class="table text-muted mt-4">
+                <thead>
+                  <tr>
+                    <th>username</th>
+                    <th>password</th>
+                    <th>role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>admin</td>
+                    <td>admin</td>
+                    <td>admin</td>
+                  </tr>
+                  <tr>
+                    <td>tinmarecic</td>
+                    <td>teen</td>
+                    <td>host</td>
+                  </tr>
+                  <tr>
+                    <td>tinomargan</td>
+                    <td>teen-o</td>
+                    <td>host</td>
+                  </tr>
+                  <tr>
+                    <td>mhorvat</td>
+                    <td>1234</td>
+                    <td>host</td>
+                  </tr>
+                  <tr>
+                    <td>imatic</td>
+                    <td>vaniticma</td>
+                    <td>user</td>
+                  </tr>
+                  <tr>
+                    <td>anap</td>
+                    <td>5678</td>
+                    <td>user</td>
+                  </tr>
+                  <tr>
+                    <td>jtomic</td>
+                    <td>salvatore</td>
+                    <td>user</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
         </div>
         <div class="row-fluid">
             <div class="col-sm-12 mt-5 text-center fixed-bottom footer">Courtesy of TIN_MAR&co &copy</div>
