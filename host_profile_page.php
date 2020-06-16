@@ -28,7 +28,7 @@
          if(!isset($_SESSION['User_ID']) || $_SESSION['Type_ID']!=2){
           header("Location: index.php");
          }
-         $sql_user = 'SELECT * FROM user where User_ID = "'.$_SESSION['User_ID'].'";';
+         $sql_user = 'SELECT * FROM `user`,`email` where user.User_ID = "'.$_SESSION['User_ID'].'" AND user.User_ID = email.User_ID;';
          $result = $conn->query($sql_user);
          ?>
         </div>
@@ -65,7 +65,7 @@
             }
 
             if(isset($_POST['password']) && $_POST['password']!==''){
-              $sql_update_password = 'UPDATE user set Password = "'.md5($_POST['username']).'"  where User_ID='.$_SESSION['User_ID'].'';
+              $sql_update_password = 'UPDATE user set Password = "'.md5($_POST['password']).'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_password);
               $changed = 1;
             }
@@ -81,6 +81,12 @@
               $conn->query($sql_update_lname);
               $changed = 1;
             }
+
+            if(isset($_POST['email']) && $_POST['email']!==''){
+              $sql_update_email = 'UPDATE email set Email = "'.$_POST['email'].'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_email);
+              $changed = 1;
+            }
             
             if(isset($_POST['dob']) && $_POST['dob']!==''){
               $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
@@ -91,6 +97,7 @@
             if(isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error']!=4){
               if(isset($_FILES['profile_pic']['tmp_name'])){
                 $changed = 1;
+                mkdir("media/pictures/");
                 $target_dir = "media/pictures/";
                 $ext = pathinfo($_FILES['profile_pic']['name']);
                 $target_file = $target_dir . rand() .'.'.$ext['extension'];
@@ -116,6 +123,7 @@
        <div class="col col-md-2 text-center user_info ">
         <!--if pic property of user table is empty show stock image-->
         <?php
+        
           if($row['User_image'] !== ''){
             echo '<img src="media/pictures/'.$row['User_image'].'" alt="profile_pic" width="80%" class="mt-2 rounded border "><br>';
           }
@@ -124,7 +132,7 @@
           }
         ?>
           <div class="text-center">
-          <h4><div class="mt-2">User info</div></h4>
+          <h4><div class="mt-4">User info</div></h4>
             <hr>
             First name: <?php echo $row['First_name']?><br>
             Last name:  <?php echo $row['Last_name']?><br>
@@ -167,6 +175,10 @@
                         <div class="row">
                           <div class="col-3">Last name:</div>
                           <div class="col"><input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">Email:</div>
+                          <div class="col"><input type="email" name="email" class="m-2" placeholder="<?php echo $row['Email']; ?>"></div>
                         </div>
                         <div class="row">
                           <div class="col-3">Date of birth:</div>

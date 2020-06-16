@@ -3,6 +3,7 @@ require('scripts/db.php');
 $conn = db();
 session_start();
 $objectid = $_POST['object_id'];
+mkdir("media/object_images/");
 $target_dir= "media/object_images/";
 foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name){
     if($_FILES['files']['error'][$key] == 0){

@@ -19,7 +19,7 @@
               <img src="media/crobook_logo_white.png" alt="logusina" height="200">
           </div>
           <div class="col-4 display-1 font-weight-bold align-self-center">
-              CRO-BOOK
+              CRO BOOK
           </div>
       </div>
      <!-- <div class="display-3 p-5 mb-5">SALVATORE GANAČEVIĆ</div>-->
@@ -68,29 +68,28 @@
               <div class="collapse" id="collapseSignup">
                 <div class="card card-body" style="background:none">
                   <form name="signup_form" method="post" action="signup_script.php" enctype="multipart/form-data">
-                   <div class="form-row justify-content-around">
-                   <!-- First name: -->
-                   <input type="text" class="col col-sm-5 form-control" name="fname" id="fname" placeholder="First name" required>
-                   <!-- Last name: -->
-                   <input type="text" class="col col-sm-5 form-control" name="lname" id="lname" placeholder="Last name" required>
-                  </div>
-                  <div class="form-row mt-3 justify-content-around">
+                  <div class="form-row justify-content-around">
                         <!-- username -->
                         <input type="text" class="col col-sm-5 form-control" name="username_signup" id="username" placeholder="Username" required>
                         <!-- password -->
                         <input type="password" class="col col-sm-5 form-control" name="password_signup" id="password" placeholder="Password" required>
                    </div>
+                   <div class="form-row mt-3 justify-content-around">
+                        <!-- First name: -->
+                        <input type="text" class="col col-sm-5 form-control" name="fname" id="fname" placeholder="First name" required>
+                        <!-- Last name: -->
+                        <input type="text" class="col col-sm-5 form-control" name="lname" id="lname" placeholder="Last name" required>
+                  </div>
                    <!-- Date of birth:<br> -->
                    <div class="form-row mt-3 justify-content-around">
                       <!-- email -->
-                      <input type="email" class="col col-sm-5 form-control" name="email" id="email" placeholder="Email" required>
-                      <!-- phone -->
+                      <input type="email" class="col col-sm-5 form-control" name="email" id="email" placeholder="Email (someone@example.com)" required>
                       <input type="date" class="col col-sm-5 form-control" name="dob" id="dob" placeholder="Your birthday date">
                    </div>
                    <div class="form-row mt-3 justify-content-around">
                       <div class="col col-sm-7">
+                        <label for="profile_pic">Upload your profile picture below:</label>
                         <input type="file" class="form-control-file" name="profile_pic" id="profile_pic"> 
-                        <label for="profile_pic">Upload your profile picture here.</label>
                       </div>
                    </div>
                     <input type="submit" value="Sign Up" class="mt-2 btn btn-info">

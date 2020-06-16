@@ -25,7 +25,7 @@
          require_once('scripts/db.php');
          $conn = db();
          session_start();
-         $sql_user = 'SELECT * FROM user where User_ID = "'.$_SESSION['User_ID'].'";';
+         $sql_user = 'SELECT * FROM `user`,`user_type` where user.User_ID = "'.$_SESSION['User_ID'].'" AND user_type.Type_ID = user.Type_ID;';
          $result = $conn->query($sql_user);
          ?>
         </div>
@@ -39,7 +39,7 @@
           <?php 
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'];}
+            echo $row['Username'].' -- '.$row['User_type'];}
           ?>
           </h6>
             <a class="dropdown-item" href="homepage.php">Homepage</a>
@@ -75,13 +75,34 @@
             <strong>Object name:</strong> <?php echo $r['Object_name']?><br>
             <strong>Object description:</strong>  <?php echo $r['Object_desc']?><br>
             <strong>Price per night:</strong>  <?php echo $r['Price'].'€'?><br>
-              <br>
+            <?php
+              if($r['User_ID'] != $_SESSION['User_ID'])
+              {
+            ?>
+            <div class="row p-5 m-0 justify-content-md-center">
+              <form name="contact" action="mailto:
+                <?php 
+                $sql_mail = 'SELECT * FROM `user`, `email` where `user`.User_ID = `email`.User_ID';
+                $res_mail = $conn->query($sql_mail);
+                foreach($res_mail as $m)
+                {
+                  echo $m['Email'];
+                }
+                ?>" method="post">
+                <input type="submit" class="mt-4 btn btn-secondary" value="Contact the host">
+                
+                <input type="hidden" value="<?php echo $_GET['objid']; ?>" name="object_id">
+              </form>
+            </div>
+            <?php
+              };
+            ?>
             <?php
               if($_SESSION['Type_ID'] == 2 && $r['User_ID'] == $_SESSION['User_ID'])
               {
             ?>
             <div class="row p-5 m-0 justify-content-md-center">
-            Upload images:<br><br>
+              Upload images:<br><br>
               <form name="upload" action="upload_slika.php" method="post" enctype="multipart/form-data">
                 <input class="btn btn-secondary col" type="file" name="files[]" multiple>
                 <input type="submit" class="mt-4 btn btn-secondary" value="Upload">

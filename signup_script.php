@@ -39,10 +39,10 @@ $_SESSION['Type_ID'] = $typeID;
 $conn -> query($signup_sql);
 $user_id_sql = 'SELECT User_ID from user where Username = "'.$username_signup.'";';
 $result_uid = $conn->query($user_id_sql);
-echo $user_id_sql;
 $row_uid = $result_uid->fetch_assoc();
 $_SESSION['User_ID'] = $row_uid['User_ID'];
-var_dump($_SESSION['User_ID']);
+$insert_email_sql = 'INSERT INTO `email` (Email_ID, Email, User_ID) VALUES (null, "'.$email.'", '.$_SESSION['User_ID'].');';
+$conn->query($insert_email_sql);
 if(isset($_SESSION['User_ID'])){
     echo 'Inserted';
     header("Location: user_profile_page.php");

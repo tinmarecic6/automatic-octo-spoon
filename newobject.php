@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="Style/user_page.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <title>CRO-BOOK</title>
+    <title>Cro Book | New object</title>
   </head>
   <body>
     <!--Banner-->
@@ -35,11 +35,11 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <h6 class="dropdown-header text-center">
           <?php 
-          $sql_user = 'Select * from `user` where `User_ID` = "'.$_SESSION['User_ID'].'"; ';
-          $result = $conn->query($sql_user);
+         $sql_user = 'SELECT * FROM `user`,`user_type` where user.User_ID = "'.$_SESSION['User_ID'].'" AND user_type.Type_ID = user.Type_ID;';
+         $result = $conn->query($sql_user);
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'];
+            echo $row['Username'].' -- '.$row['User_type'];
           }
           ?>
           </h6>
@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <div class="row justify-content-center m-3 p-3">
-                      <input type="file" name="files[]" multiple>
+                      <label>You will be able to upload pictures once you host an object.</label>
                 </div>
                 <div class="row justify-content-center mt-5">
                     <input type="submit" class="col-2 btn btn-secondary text-light" value="Host">

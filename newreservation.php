@@ -21,7 +21,7 @@
 	  <link rel="stylesheet" type="text/css" href="datepicker/daterangepicker-bs3.css" />
 	  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <title>CRO-BOOK</title>
+    <title>Cro Book | New reservation</title>
   </head>
   <body>
     <!--Banner-->
@@ -45,11 +45,11 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <h6 class="dropdown-header text-center">
           <?php 
-          $sql_user = 'Select * from `user` where `User_ID` = "'.$_SESSION['User_ID'].'"; ';
-          $result = $conn->query($sql_user);
+         $sql_user = 'SELECT * FROM `user`,`user_type` where user.User_ID = "'.$_SESSION['User_ID'].'" AND user_type.Type_ID = user.Type_ID;';
+         $result = $conn->query($sql_user);
           if($result && $result->num_rows==1){
             $row = $result->fetch_assoc();
-            echo $row['Username'];
+            echo $row['Username'].' -- '.$row['User_type'];
           }
           ?>
           </h6>

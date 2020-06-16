@@ -28,7 +28,7 @@
          if(!isset($_SESSION['User_ID']) || $_SESSION['Type_ID']!=3){
           header("Location: index.php");
          }
-         $sql_user = 'SELECT * FROM user where User_ID = "'.$_SESSION['User_ID'].'";';
+         $sql_user = 'SELECT * FROM `user`,`email` where user.User_ID = "'.$_SESSION['User_ID'].'" AND user.User_ID = email.User_ID;';
          $result = $conn->query($sql_user);
          ?>
         </div>
@@ -56,33 +56,46 @@
      <div class="row justify-content-md-center">
       <div class="col col-md-10 ">
             <?php
+            $changed = 0;
             if(isset($_POST['username']) && $_POST['username']!==''){
               $sql_update_username = 'UPDATE user set Username = "'.$_POST['username'].'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_username);
+              $changed = 1;
             }
 
             if(isset($_POST['password']) && $_POST['password']!==''){
-              $sql_update_password = 'UPDATE user set Password = "'.md5($_POST['username']).'"  where User_ID='.$_SESSION['User_ID'].'';
+              $sql_update_password = 'UPDATE user set Password = "'.md5($_POST['password']).'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_password);
+              $changed = 1;
             }
 
             if(isset($_POST['fname']) && $_POST['fname']!==''){
               $sql_update_fname = 'UPDATE user set First_name = "'.$_POST['fname'].'"  where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_fname);
+              $changed = 1;
             }
 
             if(isset($_POST['lname']) && $_POST['lname']!==''){
               $sql_update_lname = 'UPDATE user set Last_name = "'.$_POST['lname'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_lname);
+              $changed = 1;
+            }
+
+            if(isset($_POST['email']) && $_POST['email']!==''){
+              $sql_update_email = 'UPDATE email set Email = "'.$_POST['email'].'"  where User_ID='.$_SESSION['User_ID'].'';
+              $conn->query($sql_update_email);
+              $changed = 1;
             }
             
             if(isset($_POST['dob']) && $_POST['dob']!==''){
               $sql_update_dob = 'UPDATE user set date_of_birth = "'.$_POST['dob'].'" where User_ID='.$_SESSION['User_ID'].'';
               $conn->query($sql_update_dob);
+              $changed = 1;
             }
 
             if(isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error']!=4){
               if(isset($_FILES['profile_pic']['tmp_name'])){
+                $changed = 1;
                 $target_dir = "media/pictures/";
                 $ext = pathinfo($_FILES['profile_pic']['name']);
                 $target_file = $target_dir . rand() .'.'.$ext['extension'];
@@ -160,6 +173,10 @@
                           <div class="col"><input type="text" name="lname" class="m-2" placeholder="<?php echo $row['Last_name']; ?>"></div>
                         </div>
                         <div class="row">
+                          <div class="col-3">Email:</div>
+                          <div class="col"><input type="email" name="email" class="m-2" placeholder="<?php echo $row['Email']; ?>"></div>
+                        </div>
+                        <div class="row">
                           <div class="col-3">Date of birth:</div>
                           <div class="col"><input type="date" name="dob" class="m-2" placeholder="<?php echo $row['Date_of_birth']; ?>"></div>
                         </div>
@@ -184,6 +201,25 @@
         ?>
         <!--if has no past reservations show "You have no reservations, make your first!-->
          <div class="col col-md-7 text-center reservations_p shadow">
+            <?php
+              if(isset($changed) && $changed == 1)
+              {
+                $_SESSION['changed'] = 1;
+                $changed=0;
+              };
+            ?>
+            <?php if(isset($_SESSION['changed']) && $_SESSION['changed'] == 1):?>
+              <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                  <strong>Success! </strong>Your info has been edited.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+            <?php
+              $_SESSION['changed'] = 0;
+
+              endif;
+            ?>
           <?php
               if(isset($_SESSION['deleted']) && $_SESSION['deleted'] == 1):
           ?>
