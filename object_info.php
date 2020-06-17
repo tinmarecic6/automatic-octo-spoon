@@ -75,14 +75,15 @@
             <strong>Object name:</strong> <?php echo $r['Object_name']?><br>
             <strong>Object description:</strong>  <?php echo $r['Object_desc']?><br>
             <strong>Price per night:</strong>  <?php echo $r['Price'].'€'?><br>
+            <a href="newreservation.php?objid=<?php echo $_GET['objid'];?>&userid=<?php echo $_SESSION['User_ID'];?>" class="btn btn-light mt-3 text-dark">Reserve now</a>
             <?php
               if($r['User_ID'] != $_SESSION['User_ID'])
               {
             ?>
             <div class="row p-5 m-0 justify-content-md-center">
               <form name="contact" action="mailto:
-                <?php 
-                $sql_mail = 'SELECT * FROM `user`, `email` where `user`.User_ID = `email`.User_ID';
+                <?php
+                $sql_mail = 'SELECT * FROM `email` where `email`.User_ID = (Select User_ID from `object` where `object`.Object_ID = '.$_GET['objid'].');';
                 $res_mail = $conn->query($sql_mail);
                 foreach($res_mail as $m)
                 {
